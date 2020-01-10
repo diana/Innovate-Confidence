@@ -19,9 +19,11 @@ export default {
 <style>
   body{
     margin: 0%;
+    box-sizing: border-box;
   }
 
   #app{
+    font-family: 'Roboto', sans-serif;
     background-image: url(https://i.imgur.com/wubelZD.jpg);
     background-size: cover; 
     background-repeat: no-repeat;

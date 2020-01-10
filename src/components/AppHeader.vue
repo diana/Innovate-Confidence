@@ -49,7 +49,7 @@ export default {
     text-decoration: none;
     color: #FFD35D;
     justify-self: right;
-    font-weight: 10;
+    font-weight: lighter;
     font-size: 2.5vw;
     padding: .5vw;
 }

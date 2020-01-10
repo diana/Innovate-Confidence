@@ -6,7 +6,8 @@ export default{
     async getUsers(){
         return fetch(`${BASE_API}/users`).then(response => response.data)
     },
-    async createUser(user){
+    async createUser(username, email){
+        const formData = new FormData()
         // eslint-disable-next-line no-console
         await console.log(user)
 // fetch(`${BASE_API}/users`, user, method: 'POST', headers: 'Content-Type':'application/json', body: JSON.stringify({username, email}))    

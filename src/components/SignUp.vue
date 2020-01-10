@@ -4,7 +4,7 @@
         <h3>Sign Up as New User</h3>
         <router-link to="/login">Already A User?</router-link>
       </div>
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="createUser">
           <label>Username:</label>
           <input type="text" v-model="user.username" required>
           <label>Email:</label>
@@ -30,11 +30,7 @@ export default {
        }}
     },
     methods:{
-        ...mapActions('auth',["createUser"]),
-        handleSubmit(){
-            // eslint-disable-next-line no-console
-            console.log(this.createUser)
-        },
+        ...mapActions(['createUser']),
     }
 }
 </script>
