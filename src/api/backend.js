@@ -8,8 +8,9 @@ export default{
     },
     async createUser(username, email){
         const formData = new FormData()
+        formData.append('username', username, 'email', email)
         // eslint-disable-next-line no-console
-        await console.log(user)
+        await console.log(formData)
 // fetch(`${BASE_API}/users`, user, method: 'POST', headers: 'Content-Type':'application/json', body: JSON.stringify({username, email}))    
     }
 }

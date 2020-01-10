@@ -18,6 +18,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import { mapActions } from 'vuex'
 
 export default {
@@ -30,7 +31,10 @@ export default {
        }}
     },
     methods:{
-        ...mapActions(['createUser']),
+        // ...mapActions(['createUser']),
+        createUser(){
+            // eslint-disable-next-line no-console
+            return console.log(this.user)}
     }
 }
 </script>
