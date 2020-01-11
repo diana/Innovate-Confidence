@@ -11,6 +11,7 @@
         <div class="links">
             <a href="#" class="login">about</a>
             <router-link to="/login" class="login" >login</router-link>
+            <router-link to="/" class="login" >logout</router-link>
         </div>
   </div>
 </template>

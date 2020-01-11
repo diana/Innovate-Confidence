@@ -4,14 +4,35 @@
         <h3>Sign Up as New User</h3>
         <router-link to="/login">Already A User?</router-link>
       </div>
-      <form @submit.prevent="createUser">
-          <label>Username:</label>
-          <input type="text" v-model="user.username" required>
-          <label>Email:</label>
-          <input type="text" v-model="user.email" required>
-          <label>Passord:</label>
-          <input type="password" required>
+      <form @submit.prevent="onSignup">
+            <label>Email</label>
+            <input 
+                type="email"
+                label="email"
+                name="email"
+                id="email"
+                v-model="email" 
+                required
+            />
+            <label>Password</label>
+            <input 
+                type="password"
+                label="password"
+                name="password" 
+                id="password" 
+                v-model="password" 
+                required
+            />
+            <label>Confirm Password</label>
+            <input 
+                type="password"
+                name="confirmPassword" 
+                id="confirmPassword" 
+                v-model="confirmPassword" 
+                @change="comparePasswords"
+            />
           <input type="submit" />
+          <p v-if="!didPasswordsMatch">passwords do not match</p>
       </form>
 
   </div>
@@ -25,16 +46,19 @@ export default {
     name: 'SignUp',
     data(){
        return {
-           user: {
-            username: '',
-            email: ''
-       }}
+           email: '',
+           password: '',
+           confirmPassword: '',
+           didPasswordsMatch: false,
+       }
     },
     methods:{
-        // ...mapActions(['createUser']),
-        createUser(){
-            // eslint-disable-next-line no-console
-            return console.log(this.user)}
+        comparePasswords(){
+            this.didPasswordsMatch = this.password === this.confirmPassword 
+        },
+        onSignup(){
+            this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+        },
     }
 }
 </script>

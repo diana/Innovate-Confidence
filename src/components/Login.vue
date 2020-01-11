@@ -1,11 +1,26 @@
 <template>
   <div>
       <div class="login-div">
-        <form class="login-form">
-            <label>username</label>
-            <input />
+        <form class="login-form" @submit.prevent="onSignin">
+            <label>email</label>
+            <input 
+                type="email"
+                label="email"
+                name="email"
+                id="email"
+                v-model="email" 
+                required
+            />
             <label>password</label>
-            <input />
+            <input
+                type="password"
+                label="password"
+                name="password" 
+                id="password" 
+                v-model="password" 
+                required
+
+            />
             <input type="submit" />
         </form>
         <router-link to="signup" class="button" >new user?</router-link>
@@ -17,6 +32,19 @@
 
 export default {
     name: 'login',
+    data(){
+        return {
+            email: '',
+            password: '',
+        }
+    },
+
+    methods:{
+        onSignin(){
+            this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+        },
+    }
+
 }
 </script>
 

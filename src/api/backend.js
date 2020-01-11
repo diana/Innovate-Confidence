@@ -3,14 +3,23 @@
 const BASE_API = 'http://localhost:3000'
 
 export default{
-    async getUsers(){
-        return fetch(`${BASE_API}/users`).then(response => response.data)
-    },
-    async createUser(username, email){
-        const formData = new FormData()
-        formData.append('username', username, 'email', email)
+    async getUser(){
         // eslint-disable-next-line no-console
-        await console.log(formData)
-// fetch(`${BASE_API}/users`, user, method: 'POST', headers: 'Content-Type':'application/json', body: JSON.stringify({username, email}))    
+        return fetch(`${BASE_API}/users`).then(response => console.log(response))
+    },
+    async createUser(newUser){
+        return(
+            fetch(`${BASE_API}/users`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body:  JSON.stringify(
+                    {user_id: newUser.id}
+                )
+            }),
+            // eslint-disable-next-line no-console
+            console.log('post')
+        )
     }
 }
