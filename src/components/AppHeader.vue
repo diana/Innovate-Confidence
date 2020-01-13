@@ -4,14 +4,14 @@
             <!-- <router-link to="/" class="active item">
                 <img src="https://i.imgur.com/uHMskmT.png" class="logo-small"/>
             </router-link> -->
-            <router-link to="/" class="active item">
+            <router-link to="/home" class="active item">
                 <img src="https://i.imgur.com/zxaHE8Z.png" class="logo"/>
             </router-link>
         </div>
         <div class="links">
             <a href="#" class="login">about</a>
             <router-link to="/login" class="login" >login</router-link>
-            <router-link to="/" class="login" >logout</router-link>
+            <router-link to="/home" class="login" >logout</router-link>
         </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
     background-color: #011627;
     justify-content: space-between;
     padding: 1%;
+    opacity: 85%;
 }
 .logo-small{
     width: 6vw;
@@ -44,7 +45,8 @@ export default {
     width: 50%;
     display: flex;
     justify-content: flex-end;
-    align-items: center
+    align-items: center;
+    border-radius: 3px;
 }
 .login{
     text-decoration: none;
@@ -53,5 +55,6 @@ export default {
     font-weight: lighter;
     font-size: 2.5vw;
     padding: .5vw;
+    border-radius: 3px;
 }
 </style>
