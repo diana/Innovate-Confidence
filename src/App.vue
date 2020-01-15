@@ -30,6 +30,9 @@ export default {
     background-repeat: no-repeat;
     background-position: top center;
     width: 100vw;
-    height: 100vh;
+    height: 200vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>

@@ -5,7 +5,7 @@
                 <h3>Sign Up as New User</h3>
             </div>
             <div class="email">
-                <label>Email</label>
+                <label class="lable">Email</label>
                 <input 
                     type="email"
                     label="email"
@@ -13,10 +13,11 @@
                     id="email"
                     v-model="email" 
                     required
+                    class="input"
                 />
             </div>
             <div class="password">
-                <label>Password</label>
+                <label class="lable">Password</label>
                 <input 
                     type="password"
                     label="password"
@@ -24,16 +25,18 @@
                     id="password" 
                     v-model="password" 
                     required
+                    class="input"
                 />
-            </div>
+            </div >
             <div class="password">
-                <label>Confirm Password</label>
+                <label class="lable">Confirm Password</label>
                 <input 
                     type="password"
                     name="confirmPassword" 
                     id="confirmPassword" 
                     v-model="confirmPassword" 
                     @change="comparePasswords"
+                    class="input"
                 />
             </div>
             <div class='password'>

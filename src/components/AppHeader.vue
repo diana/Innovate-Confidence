@@ -34,6 +34,7 @@ export default {
     justify-content: space-between;
     padding: 1%;
     opacity: 85%;
+    width: 100%
 }
 .logo-small{
     width: 6vw;

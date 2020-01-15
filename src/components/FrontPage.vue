@@ -31,12 +31,13 @@ export default {
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
-        align-items: left;
+        align-items: center;
         margin: 5vw;
         background-color: #009FB7;
         opacity: 75%;
         border-radius: 3px;
         padding: 1vw;
+        width: calc(100% - 255px)
     }
     .intro-head{
         font-family: "Roboto", sans-serif;
@@ -48,12 +49,15 @@ export default {
         margin: 1vw;
         border-radius: 3px;
         align-self: center;
+        width: 85%;
+        
     }
     .intro-content{
         display: flex;
         justify-content: space-between;
         margin: 1vw;
         align-items: center;
+        width: 85%
     }
     .introduction{
         font-size: 2vw;

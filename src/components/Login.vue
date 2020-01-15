@@ -3,7 +3,7 @@
       <div class="login-div">
         <form class="login-form" @submit.prevent="onSignin">
             <div class="email">
-                <label>Email</label>
+                <label class="lable">Email</label>
                 <input 
                     type="email"
                     label="email"
@@ -11,10 +11,11 @@
                     id="email"
                     v-model="email" 
                     required
+                    class="input"
                 />
             </div>
             <div class="password">
-                <label>Password</label>
+                <label class="lable" >Password</label>
                 <input
                     type="password"
                     label="password"
@@ -22,7 +23,7 @@
                     id="password" 
                     v-model="password" 
                     required
-
+                    class="input"
                 />
             </div>
             <div class='div-submit'>
@@ -47,7 +48,7 @@ export default {
 
     methods:{
         onSignin(){
-            this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+            this.$store.dispatch('authorizeUser', {email: this.email, password: this.password})
         },
     }
 
@@ -91,7 +92,7 @@ export default {
     border-radius: 3px;
 
 }
-label{
+.label{
     font-size: 2vw;
     width: 25%;
     text-align: center;
@@ -105,18 +106,18 @@ label{
     align-content: center;
 
 }
-input:hover{
+.input:hover{
     background-color: #FFD35D;
     border-radius: 3px;
 
 }
-input::selection{
+.input::selection{
     border-color: #FFD35D;
     height: 2vw;
     border-radius: 3px;
 
 }
-input{
+.input{
     margin: 1vw;
     width: 35%;
     align-self: center;
@@ -138,8 +139,8 @@ input{
 .submit{
     width: fit-content;
     align-self: center;
-    background-color: #FDFFFC;
-    font-size: 2vw;
+    background-color: #8BD3DE;
+    font-size: 20px;
     padding: 1px 7px 2px;
     text-decoration: none;
     color: #011627;
