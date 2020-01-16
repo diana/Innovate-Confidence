@@ -43,5 +43,33 @@ export default{
             // eslint-disable-next-line no-console
             .then(response => console.log(response))
         )
+    },
+    async editGame(game){
+       await fetch(`${BASE_API}/games/${game.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: game.id,
+                user_id: game.user_id,
+                title: game.title,
+                intro: game.intro,
+                video: game.video
+            })
+        })
+        return fetch(`${BASE_API}/users/${game.user_id}`)
+            .then(response => response.json())
+            // eslint-disable-next-line no-console
+            .then(result => result.games)
+    },
+    async deleteGame(game){
+        await fetch(`${BASE_API}/games/${game.id}`, {
+            method: 'DELETE'
+        })
+        return fetch(`${BASE_API}/users/${game.user_id}`)
+            .then(response => response.json())
+            // eslint-disable-next-line no-console
+            .then(result => result.games)
     }
 }

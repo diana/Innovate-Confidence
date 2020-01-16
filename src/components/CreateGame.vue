@@ -107,7 +107,7 @@ export default {
 .label-input100 {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
-    color: #009FB7;
+    color: #8BD3DE;
     line-height: 1.5;
     width: 100%;
     padding-bottom: 11px;
@@ -130,7 +130,7 @@ input.input100 {
     background: #FDFFFC;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
-    color: #009FB7;
+    color: #011627;
 }
 .wrap-input100 {
     width: 100%;

@@ -3,13 +3,13 @@ import * as firebase from 'firebase'
 import {router} from '../../main'
 
 const state = {
-    users: {},
+    users: [],
     user: {
-        id: '',
-        games: [],
+        id: null,
+        games: null,
     },
     games: [],
-    userId: 0,
+    userId: null,
     isLoggedIn: false,
     game: {
         id: '',
@@ -24,6 +24,9 @@ const state = {
 const getters = {
     user(state) {
         return state.user
+    },
+    userId(state) {
+        return state.user_id
     },
     games(state) {
         return state.game
@@ -76,20 +79,51 @@ const actions = {
             }
         )
     },
+
+//     async autoSignin({commit}, user) {
+//         const newUserId = user.uid
+
+//         router.push('/userdashboard')
+//         const response = await backend.getUser(newUserId)
+//             commit('setUser', response)
+//             commit('setUserId', response.id)
+//             commit('setLoggedIn', true)
+//             commit('setGames', response.games)
+// },
+
     getGame({commit}, game){
         commit('setGame', game)
         router.push('/gamedashboard')
     },
-    editGame({commit}, game){
+
+    setEditGame({commit}, game){
         commit('setGame', game)
         router.push('/editgame')
     },
+
     createGame({commit,}, game){
         backend.createGame(game)
         commit('addGame', game)
         commit('setGame', game)
         router.push('/userdashboard')
-    },  
+    },
+
+    async editGame({commit}, game){
+        const response = await backend.editGame(game)
+            commit('setGame', game)
+            commit('setGames', response)
+        router.push('/gamedashboard')
+    },
+
+    async deleteGame({commit}, game){
+        const response = await backend.deleteGame(game)
+            commit('setGames', response)
+        router.push('/userdashboard')
+    },
+    
+    logoutUser(){
+
+    }
 }
 
 const mutations = {
@@ -117,6 +151,9 @@ const mutations = {
             video: game.video 
         }
     },
+    // logOut(state){
+    //     state.
+    // }
 }
 
 export default{

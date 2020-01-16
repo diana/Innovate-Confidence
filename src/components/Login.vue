@@ -1,9 +1,11 @@
 <template>
-  <div>
-      <div class="login-div">
-        <form class="login-form" @submit.prevent="onSignin">
-            <div class="email">
-                <label class="lable">Email</label>
+  <div class="wrap-contact100">
+    <form class="contact100-form validate-form" @submit.prevent="onSignin">
+        <span class="contact100-form-title">
+        Login
+        </span>
+        <label class="label-input100">Email</label>
+            <div class="wrap-input100 validate-input">
                 <input 
                     type="email"
                     label="email"
@@ -11,11 +13,12 @@
                     id="email"
                     v-model="email" 
                     required
-                    class="input"
+                    class="input100"
                 />
             </div>
-            <div class="password">
-                <label class="lable" >Password</label>
+
+        <label class="label-input100" >Password</label>
+            <div class="wrap-input100 validate-input alert-validate">
                 <input
                     type="password"
                     label="password"
@@ -23,15 +26,14 @@
                     id="password" 
                     v-model="password" 
                     required
-                    class="input"
+                    class="input100"
                 />
             </div>
-            <div class='div-submit'>
+            <div class='edit-submit'>
                 <input class='submit' type="submit" />
             </div>
         </form>
-        <router-link to="signup" class="button" >new user?</router-link>
-      </div>
+        <router-link to="/signup" class="router-button" >new user?</router-link>
   </div>
 </template>
 
@@ -145,7 +147,6 @@ export default {
     text-decoration: none;
     color: #011627;
     border-radius: 3px;
-
 }
 .button{
     text-decoration: none;

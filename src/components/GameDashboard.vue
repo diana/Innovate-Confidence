@@ -12,6 +12,8 @@
                       <tr class='games'>
                         <th>About Game</th>
                         <th>Video</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                         <tbody>
                       <tr>
@@ -27,11 +29,17 @@
                                 frameborder="0">
                             </iframe>
                         </td>
+                        <td>
+                          <router-link to="/editgame" class="ok submit">Edit</router-link>
+                        </td>
+                        <td>
+                          <button @click="deleteGame(game)" class="submit">Delete</button>
+                        </td>
                       </tr>
                      </tbody>
                     </table>
                     <router-link to="/userdashboard" class="submit" >
-                    Back To Dashboard
+                    Back To User Dashboard
                     </router-link>
                     </div>
                   </div>
@@ -47,10 +55,19 @@
 import { mapState } from 'vuex'
 
 export default {
-    name: 'gamedashboard',
+  name: 'gamedashboard',
+
   computed: mapState({
     game: state => state.auth.game
   }),
+  methods:{
+    editGame(game){
+      this.$store.dispatch('setEditGame', game)
+    },
+    deleteGame(game){
+      this.$store.dispatch('deleteGame', game)
+    },
+  }
 }
 </script>
 
@@ -70,5 +87,37 @@ export default {
 iframe{
     margin-bottom: 2vw;
     background-color: #011627;
+}
+.ok {
+    -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 11px system-ui;
+    padding: 1px 7px 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    border-image: initial;
+    width: fit-content;
+    align-self: center;
+    background-color: #8BD3DE;
+    font-size: 20px;
+    padding: 1px 7px 2px;
+    text-decoration: none;
+    color: #011627;
+    border-radius: 3px;
 }
 </style>

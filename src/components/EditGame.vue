@@ -38,10 +38,14 @@
                 class="input100"
             />
           </div>
-        <div class='div-submit'>
+        <div class='edit-submit'>
             <input class='submit' type="submit" />
         </div>      
     </form>
+    <div class="router-div">
+      <router-link to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
+      <router-link to="/userdashboard" class="router-button">To User Dashboard</router-link>
+    </div>
   </div>
 </template>
 
@@ -64,7 +68,8 @@ export default {
   }),
       methods:{
         onSubmit(){
-            this.$store.dispatch('createGame', {
+            this.$store.dispatch('editGame', {
+                id: this.id,
                 user_id: this.user_id,
                 title: this.title,
                 intro: this.intro,
@@ -77,5 +82,25 @@ export default {
 </script>
 
 <style>
-
+.edit-submit{
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+.router-div{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.router-button{
+    width: fit-content;
+    align-self: center;
+    background-color: #D0EDF1;
+    font-size: 20px;
+    padding: 1px 7px 2px;
+    text-decoration: none;
+    color: #011627;
+    border-radius: 3px;
+}
 </style>

@@ -1,11 +1,9 @@
 <template>
-    <div class="login-div">
-        <form @submit.prevent="onSignup" class="login-form">
-            <div class="heading">
-                <h3>Sign Up as New User</h3>
-            </div>
-            <div class="email">
-                <label class="lable">Email</label>
+    <div class="wrap-contact100">
+        <form @submit.prevent="onSignup" class="contact100-form validate-form">
+            <span class="contact100-form-title">Sign Up as New User</span>
+            <label class="label-input100">Email</label>
+            <div class="wrap-input100 validate-input">
                 <input 
                     type="email"
                     label="email"
@@ -13,11 +11,11 @@
                     id="email"
                     v-model="email" 
                     required
-                    class="input"
+                    class="input100"
                 />
             </div>
-            <div class="password">
-                <label class="lable">Password</label>
+            <label class="label-input100">Password</label>
+            <div class="wrap-input100 validate-input">
                 <input 
                     type="password"
                     label="password"
@@ -25,28 +23,31 @@
                     id="password" 
                     v-model="password" 
                     required
-                    class="input"
+                    class="input100"
                 />
             </div >
-            <div class="password">
-                <label class="lable">Confirm Password</label>
+            <label class="label-input100">Confirm Password</label>
+            <div class="wrap-input100 validate-input">
                 <input 
                     type="password"
                     name="confirmPassword" 
                     id="confirmPassword" 
                     v-model="confirmPassword" 
                     @change="comparePasswords"
-                    class="input"
+                    class="input100"
                 />
             </div>
-            <div class='password'>
-                <p v-if="!didPasswordsMatch">passwords do not match</p>
+            <div class='wrap-input100 validate-input'>
+                <label 
+                    v-if="!didPasswordsMatch"
+                    class="label-input100"   
+                >passwords do not match</label>
             </div>
-            <div class='div-submit'>
+            <div class='edit-submit'>
                 <input type="submit" class='submit'/>
             </div>
         </form>
-        <router-link to="/login" class="button">Already A User?</router-link>
+        <router-link to="/login" class="router-button">Already A User?</router-link>
   </div>
 </template>
 

@@ -34,7 +34,7 @@
                           </td>
                           <td>7</td>
                           <td>
-                            <button @click="editGame(game)" class='game-button'>edit</button>
+                            <button @click="editGame(game)" class='game-button'>Edit</button>
                           </td>
                         </tr>
                        </tbody>
@@ -66,7 +66,7 @@ export default {
       this.$store.dispatch('getGame', game)
     },
     editGame(game){
-      this.$store.dispatch('editGame', game)
+      this.$store.dispatch('setEditGame', game)
     },
   }
 }
