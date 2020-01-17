@@ -239,7 +239,7 @@ table {
 .table td, .table th {
     vertical-align: middle;
     line-height: 1;
-    white-space: nowrap;
+    white-space: pre-wrap;
 }
 tbody {
     display: table-row-group;
@@ -260,12 +260,12 @@ tr {
   vertical-align: top;
   border-top: 1px solid #D0D1CF;
   padding: .8375rem;
-  color: #011627
+  color: #011627;
+  white-space: pre-wrap;
 }
 .table td, .table th {
     vertical-align: middle;
     line-height: 1;
-    white-space: nowrap;
 }
 table {
     border-collapse: collapse;
@@ -274,13 +274,15 @@ table {
     vertical-align: middle;
     font-size: .875rem;
     line-height: 1;
-    white-space: nowrap;
+    white-space: pre-wrap;
 }
 .table td, .table th {
     padding: .8375rem;
     vertical-align: top;
     border-top: 1px solid #D0D1CF;
-    text-align: left
+    text-align: left;
+    white-space: pre-wrap;
+
 }
 *, :after, :before {
     -webkit-box-sizing: border-box;
@@ -289,6 +291,7 @@ table {
 td {
     display: table-cell;
     vertical-align: inherit;
+    white-space: pre-wrap;
 }
 th{
   font-family: 'Roboto', sans-serif;

@@ -10,6 +10,7 @@ import UserDashboard from './components/UserDashboard'
 import GameDashboard from './components/GameDashboard'
 import CreateGame from './components/CreateGame'
 import EditGame from './components/EditGame'
+import ViewGame from './components/ViewGame'
 
 
 Vue.use(VueRouter)
@@ -25,6 +26,7 @@ export const router = new VueRouter({
     { path: '/gamedashboard', component: GameDashboard },
     { path: '/creategame', component: CreateGame },
     { path: '/editgame', component: EditGame },
+    { path: '/viewgame', component: ViewGame },
   ]
 })
 

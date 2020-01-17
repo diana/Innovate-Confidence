@@ -32,7 +32,7 @@ export default {
     align-items: center;
     background-color: #011627;
     justify-content: space-between;
-    padding: 1%;
+    padding: .5%;
     opacity: 85%;
     width: 100%
 }
@@ -40,7 +40,7 @@ export default {
     width: 6vw;
 }
 .logo{
-    width: 20vw;
+    width: 15%;
 }
 .links{
     width: 50%;
@@ -54,7 +54,7 @@ export default {
     color: #FFD35D;
     justify-self: right;
     font-weight: lighter;
-    font-size: 2.5vw;
+    font-size: 20px;
     padding: .5vw;
     border-radius: 3px;
 }

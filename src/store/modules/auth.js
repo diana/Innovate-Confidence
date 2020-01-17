@@ -7,6 +7,7 @@ const state = {
     user: {
         id: null,
         games: null,
+        scenarios: null
     },
     games: [],
     userId: null,
@@ -17,7 +18,9 @@ const state = {
         title: '',
         intro: '',
         video: '',
+        scenarios: [],
     },
+    scenarios: []
 
 }
 
@@ -79,7 +82,6 @@ const actions = {
             }
         )
     },
-
 //     async autoSignin({commit}, user) {
 //         const newUserId = user.uid
 
@@ -91,9 +93,15 @@ const actions = {
 //             commit('setGames', response.games)
 // },
 
-    getGame({commit}, game){
+    async getGame({commit}, game){
         commit('setGame', game)
         router.push('/gamedashboard')
+        const response = await backend.getGame(game)
+        // eslint-disable-next-line no-console
+            console.log(response)
+            commit('setScenario', response)
+            // eslint-disable-next-line no-console
+            console.log(state.scenarios)
     },
 
     setEditGame({commit}, game){
@@ -128,7 +136,7 @@ const actions = {
 
 const mutations = {
     setUser(state, payload){
-      state.user = {id: payload.id, games: payload.games}
+      state.user = {id: payload.id, games: payload.games, scenarios: payload.scenarios}
     },
     setLoggedIn(state, status){
         state.isLoggedIn = status
@@ -148,9 +156,13 @@ const mutations = {
             user_id: game.user_id, 
             title: game.title, 
             intro: game.intro, 
-            video: game.video 
+            video: game.video,
+            scenarios: game.scenarios
         }
     },
+    setScenario(state, scenarios){
+        state.scenarios = scenarios
+    }
     // logOut(state){
     //     state.
     // }

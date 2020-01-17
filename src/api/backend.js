@@ -40,8 +40,15 @@ export default{
                     video: game.video
                 })
             })
-            // eslint-disable-next-line no-console
-            .then(response => console.log(response))
+        )
+    },
+
+    async getGame(game){
+        return(
+            await fetch(`${BASE_API}/games/${game.id}`)
+                .then(response => response.json())
+                // eslint-disable-next-line no-console
+                .then(result => result.scenarios)
         )
     },
     async editGame(game){
@@ -60,7 +67,6 @@ export default{
         })
         return fetch(`${BASE_API}/users/${game.user_id}`)
             .then(response => response.json())
-            // eslint-disable-next-line no-console
             .then(result => result.games)
     },
     async deleteGame(game){
@@ -69,7 +75,6 @@ export default{
         })
         return fetch(`${BASE_API}/users/${game.user_id}`)
             .then(response => response.json())
-            // eslint-disable-next-line no-console
             .then(result => result.games)
     }
 }

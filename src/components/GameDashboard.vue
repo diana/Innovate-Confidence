@@ -14,10 +14,15 @@
                         <th>Video</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                       </tr>
                         <tbody>
                       <tr>
-                        <td>{{game.intro}}</td>
+                        <td>
+                          <div class=" game-intro">
+                            {{game.intro}}
+                          </div>
+                        </td> 
                         <td>
                             <iframe 
                                 id="ytplayer" 
@@ -28,6 +33,9 @@
                                 :src="game.video"
                                 frameborder="0">
                             </iframe>
+                        </td>
+                        <td>
+                          <router-link to="/viewgame" class="ok submit">Game</router-link>
                         </td>
                         <td>
                           <router-link to="/editgame" class="ok submit">Edit</router-link>
@@ -119,5 +127,8 @@ iframe{
     text-decoration: none;
     color: #011627;
     border-radius: 3px;
+}
+.game-intro{
+  word-wrap: break-word;
 }
 </style>
