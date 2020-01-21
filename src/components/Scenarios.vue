@@ -2,9 +2,10 @@
     <div class="scenarios">
         <div class="game-div">
             <div class="router-div">
-                <router-link to="/viewgame" class="router-button">To Game</router-link>
+                <router-link :to="{name: 'viewgame', params: {id: game.id }}" class="router-button">To Game</router-link>
                 <h1 class="game-title">Please Pick One</h1>
-                <router-link to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
+                <router-link v-if="isLoggedIn" to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
+                <router-link v-else to="/home" class="router-button">Home</router-link>
             </div>
             <div class="flex" >
                 <div 
@@ -42,7 +43,9 @@ import { mapState } from 'vuex'
 export default {
     name: 'scenarios',
     computed: mapState({
-        scenarios: state => state.auth.scenarios,
+      scenarios: state => state.auth.scenarios,
+      game: state => state.auth.game,
+      isLoggedIn: state => state.auth.isLoggedIn
     }),
     methods:{
         onClick(scenario){

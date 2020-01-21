@@ -12,18 +12,23 @@ export default{
                 }))
     },
     async createUser(newUser){
-        return(
-            fetch(`${BASE_API}/users`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/json'
-                },
-                body:  JSON.stringify(
-                    {user_id: newUser.id}
+        fetch(`${BASE_API}/users`,{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:  JSON.stringify(
+                {user_id: newUser.id}
                 )
-            }),
-            // eslint-disable-next-line no-console
-            console.log('post')
+            })
+        return(
+            fetch(`${BASE_API}/users`)
+                .then(response => response.json())
+                .then(result => result.find(user => {
+                    if (newUser.id === user.user_id){
+                        return  user
+                    }
+                }))        
         )
     },
     
@@ -86,6 +91,15 @@ export default{
     async getGame(game){
         return(
             await fetch(`${BASE_API}/games/${game.id}`)
+                .then(response => response.json())
+                // eslint-disable-next-line no-console
+                .then(result => result)
+        )
+    },
+
+    async showGame(id){
+        return(
+            await fetch(`${BASE_API}/games/${id}`)
                 .then(response => response.json())
                 // eslint-disable-next-line no-console
                 .then(result => result)

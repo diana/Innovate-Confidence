@@ -43,13 +43,15 @@
         </div>      
     </form>
     <div class="router-div">
-      <router-link to="/userdashboard" class="router-button">To User Dashboard</router-link>
+      <router-link :to="{name: 'userdashboard', params: { id: user.id }}" class="router-button">To User Dashboard</router-link>
     </div>
 
   </div>
 </template>
 
 <script>
+import{ mapState} from 'vuex'
+
 export default {
     name: 'CreateGame',
     props: ['games'],
@@ -61,7 +63,9 @@ export default {
             video: ''
         }
     },
-
+  computed: mapState({
+    user: state => state.auth.user,
+  }),
     methods:{
         onSubmit(){
             this.$store.dispatch('createGame', {

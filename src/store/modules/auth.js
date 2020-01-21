@@ -36,7 +36,17 @@ const state = {
         question: '',
         answer: ''
     },
-    answer: '',
+    attempt: {
+        firstName: '',
+        lastName: '',
+        game_id: '',
+        new: false,
+    },
+    answer: {
+        answer: '',
+        question_id: null
+    },
+    answers: []
 }
 const getters = {
     user(state) {
@@ -57,16 +67,16 @@ const actions = {
     signUserUp({commit}, payload){
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then( 
-            user => {
+            async user => {
                 const newUser = {
                     id: user.user.uid
                 }
                 // eslint-disable-next-line no-console
                 console.log(newUser)
-                commit('setUser', newUser)
                 window.localStorage.setItem('user', newUser)
-                backend.createUser(newUser)
-                router.push('/userdashboard')
+                const response = await backend.createUser(newUser)
+                    commit('setUser', newUser)
+                    router.push({name: 'userdashboard', params: { id: response.id }})
             }
         )
         .catch(
@@ -88,7 +98,7 @@ const actions = {
                     commit('setUserId', response.id)
                     commit('setLoggedIn', true)
                     commit('setGames', response.games)
-                    router.push('/userdashboard')
+                    router.push({name: 'userdashboard', params: { id: response.id }})
             },
         )
         .catch(
@@ -121,6 +131,17 @@ const actions = {
             console.log(state.questions)
     },
 
+    async showGame({commit}, id){
+        const response = await backend.showGame(id)
+        // eslint-disable-next-line no-console
+        console.log(response)
+            commit('setGame', response)
+            commit('setScenarios', response.scenarios)
+            commit('setQuestions', response.questions)
+            // eslint-disable-next-line no-console
+            console.log(state.questions)
+    },
+
     async getQuestions({commit}, scenario){
         const response = await backend.getQuestions(scenario)
         // eslint-disable-next-line no-console
@@ -129,7 +150,7 @@ const actions = {
         commit('setScenario', scenario)
         // eslint-disable-next-line no-console
         console.log(state.questions)
-        router.push('/questions')
+        router.push({name: 'questions', params: {id: scenario.id}})
     },
 
     async getEditQuestions({commit}, scenario){
@@ -239,6 +260,12 @@ const actions = {
     logOut({commit}, event){
         commit('logOut', event)
         router.push('/home')
+    },
+
+    newAttempt({commit}, attempt){
+        // eslint-disable-next-line no-console
+        commit('setAttempt', attempt)
+        router.push({name: 'scenarios', params: {id: attempt.game_id}})
     }
 }
 
@@ -332,6 +359,14 @@ const mutations = {
             answer: ''
         },
         state.answer = ''
+    },
+    setAttempt(state, attempt){
+        state.attempt = {
+            firstName: attempt.firstName,
+            lastName: attempt.lastName,
+            game_id: attempt.game_id,
+            new: true,
+        }
     }
 }
 

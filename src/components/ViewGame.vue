@@ -2,9 +2,9 @@
     <div class="scenarios">
         <div class="game-div">
             <div class="router-div">
-                <router-link to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
+                <router-link v-if="isLoggedIn" to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
                 <h1 class="game-title">{{game.title}}</h1>
-                <router-link to="/userdashboard" class="router-button">To User Dashboard</router-link>
+                <router-link v-if="isLoggedIn" to="/userdashboard" class="router-button">To User Dashboard</router-link>
             </div>
             <div class="body-div">
                 <div class="game-intro">
@@ -24,7 +24,8 @@
                             frameborder="0">
                         </iframe>
                     </div>
-                    <router-link to="/scenarios" class="add-button">Enter Game</router-link>
+                    <router-link v-if="isLoggedIn || attempt" :to="{name: 'scenarios', params: { id: game.id}}" class="add-button">Enter Game</router-link>
+                    <router-link v-else :to="{name: 'player', params: { game_id: game.id}}" class="add-button">Enter Game</router-link>
                 </div>
             </div>
         </div>
@@ -38,8 +39,14 @@ export default {
     name: 'viewgame',
     computed: mapState({
         scenarios: state => state.auth.scenarios,
-        game: state => state.auth.game
-    })
+        game: state => state.auth.game,
+        isLoggedIn: state => state.auth.isLoggedIn,
+        attempt: state => state.auth.attempt.new
+    }),
+    created(){
+      // eslint-disable-next-line no-console
+      this.$store.dispatch('showGame', this.$route.params.id)
+    }
 
 }
 </script>

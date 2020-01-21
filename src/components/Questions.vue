@@ -4,7 +4,7 @@
             <div class="router-div">
                 <router-link to="/viewgame" class="router-button">To Game</router-link>
                 <h1 class="game-title">Answer</h1>
-                <router-link to="/scenarios" class="router-button">Back to Scenarios</router-link>
+                <router-link :to="{name: 'scenarios', params: {id: game.id}}" class="router-button">Back to Scenarios</router-link>
             </div>
             <div class="flex" >
                 <div class="card">
@@ -66,6 +66,7 @@ export default {
   },
   name: 'questions',
   computed: mapState({
+      game: state => state.auth.game,
       questions: state => state.auth.questions,
   }),
   methods:{

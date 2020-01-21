@@ -20,6 +20,7 @@ import EditQuestions from './components/EditQuestions'
 import EditQuestion from './components/EditQuestion'
 import CreateQuestion from './components/CreateQuestion'
 import Questions from './components/Questions'
+import Player from './components/Player'
 
 Vue.use(VueRouter)
 
@@ -28,9 +29,10 @@ export const router = new VueRouter({
   routes: [
     { path: '/home', component: FrontPage },
     { path: '/login', component: Login },
+    { path: '/player', name: 'player', component: Player },
     { path: '/signup', component: SignUp },
     { 
-      path: '/userdashboard/',
+      path: '/userdashboard/:id',
       name: 'userdashboard',
       component: UserDashboard,
       beforeEnter(to,from,next){
@@ -68,14 +70,19 @@ export const router = new VueRouter({
       component: EditGame,
       beforeEnter(to,from,next){
         if(store.getters['loggedIn']){
-          next()
+          next(store.getters['loggedIn'])
         } else{
           next('/login')
         }
       } 
     },
-    { path: '/viewgame', component: ViewGame },
-    { path: '/scenarios', component: Scenarios },
+    { 
+      path: '/game/:id', 
+      name: 'viewgame', 
+      component: ViewGame,
+
+    },
+    { path: '/scenarios/:id', name: 'scenarios', component: Scenarios },
     { 
       path: '/editscenarios', 
       component: EditScenarios,
@@ -109,7 +116,7 @@ export const router = new VueRouter({
         }
       }
     },
-    { path: '/questions', component: Questions },
+    { path: '/questions/:id', name:'questions', component: Questions },
     { 
       path: '/editquestions', 
       component: EditQuestions,

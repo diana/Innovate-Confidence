@@ -58,7 +58,7 @@
     </form>
     <div class="router-div">
       <router-link to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
-      <router-link to="/userdashboard" class="router-button">To User Dashboard</router-link>
+      <router-link :to="{name: 'userdashboard', params: { id: user.id}}" class="router-button">To User Dashboard</router-link>
     </div>
   </div>
 </template>
@@ -78,6 +78,7 @@ export default {
     },
   name: 'editgame',
   computed: mapState({
+    user: state => state.auth.user,
     game: state => state.auth.game,
     scenarios: state => state.auth.scenarios,
     questions: state => state.auth.questions,

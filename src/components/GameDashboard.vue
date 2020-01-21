@@ -15,6 +15,7 @@
                         <th>Scenarios</th>
                         <th>Questions</th>
                         <th></th>
+                        <th>URL</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -44,7 +45,10 @@
                           </iframe>
                         </td>
                         <td>
-                          <router-link to="/viewgame" class="ok submit">Game</router-link>
+                          <a :href="'localhost:8080/game/' + game.id">localhost:8080/game/{{game.id}}</a>
+                        </td>
+                        <td>
+                          <router-link :to="{ name: 'viewgame', params: { id: game.id}}" class="ok submit">Game</router-link>
                         </td>
                         <td>
                           <router-link to="/editgame" class="ok submit">Edit</router-link>
@@ -56,7 +60,7 @@
                       </tr>
                     </tbody>
                   </table>
-                  <router-link to="/userdashboard" class="submit" >
+                  <router-link :to="{ name: 'userdashboard', params: { id: user.id}}" class="submit" >
                     Back To User Dashboard
                   </router-link>
                   </div>
@@ -77,9 +81,10 @@ export default {
   name: 'gamedashboard',
 
   computed: mapState({
+    user: state => state.auth.user,
     game: state => state.auth.game,
     scenarios: state => state.auth.scenarios,
-    questions: state => state.auth.questions
+    questions: state => state.auth.questions,
   }),
   methods:{
     editGame(game){
