@@ -49,12 +49,7 @@ const getters = {
         return state.game
     },
     loggedIn(state){
-        if(state.loggedIn === true){
-            return state.isLoggedIn
-        }
-        else{
-            return null
-        }
+        return state.isLoggedIn
     }
 }
 
@@ -88,13 +83,12 @@ const actions = {
             async user => {
                 const newUserId = user.user.uid
 
-                router.push('/userdashboard')
                 const response = await backend.getUser(newUserId)
                     commit('setUser', response)
                     commit('setUserId', response.id)
                     commit('setLoggedIn', true)
                     commit('setGames', response.games)
-
+                    router.push('/userdashboard')
             },
         )
         .catch(
@@ -211,7 +205,7 @@ const actions = {
     async deleteGame({commit}, game){
         const response = await backend.deleteGame(game)
             commit('setGames', response)
-        router.push('/userdashboard')
+            router.push('/userdashboard')
     },
     
     async deleteScenario({commit}, scenario){

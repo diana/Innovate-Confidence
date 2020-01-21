@@ -4,7 +4,7 @@
             <div class="router-div">
                 <router-link to="/viewgame" class="router-button">To Game</router-link>
                 <h1 class="game-title">Answer</h1>
-                <router-link to="/gamedashboard" class="router-button">To User Dashboard</router-link>
+                <router-link to="/scenarios" class="router-button">Back to Scenarios</router-link>
             </div>
             <div class="flex" >
                 <div class="card">
@@ -39,16 +39,16 @@
                             <h1>{{question.question}}...</h1>
                             <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
                         </div>
-                        <textarea v-model="yourAnswer" placeholder="enter answer here"></textarea>
-                        <button type="submit" @click="getAnswer">Submit</button>
-                        <div v-if="question.answer === answer">
-                          <h1>Your Answer</h1>
-                          <p>{{this.yourAnswer}}</p>
+                        <textarea req v-model="yourAnswer" placeholder="enter answer here"></textarea>
+                        <div class="answers" v-if="isClicked">
                           <h1>Correct Answer</h1>
-                          <p>{{this.answer}}</p>
+                          <p>{{question.answer}}</p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="answer-questions">
+              <button class="submit-answer" @click="onClick">Submit</button>
             </div>
         </div>
     </div>
@@ -60,8 +60,8 @@ import { mapState } from 'vuex'
 export default {
     data(){
     return{
-        answer: this.$store.state.auth.answer,
-        yourAnswer: ""
+        isClicked: false,
+        yourAnswer: "",
   }
   },
   name: 'questions',
@@ -69,10 +69,10 @@ export default {
       questions: state => state.auth.questions,
   }),
   methods:{
-    getAnswer(question){
-      // eslint-disable-next-line no-console
-      console.log(question)
-      this.$store.dispatch('getAnswer', question)
+    getAnswer(){
+    },
+    onClick(){
+      this.isClicked = true
     }
   }
 }
@@ -101,7 +101,6 @@ body {
 .flex {
   display: flex;
   justify-content: space-evenly;
-  padding-bottom: 60px;
 }
 
 .card:hover {
@@ -373,6 +372,9 @@ img{
     margin-bottom: 30px;
     opacity: 75%;
     border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 textarea{
     width: 100%;
@@ -382,4 +384,29 @@ textarea{
     color: #D0EDF1;
     text-shadow: 1px 1px #FFCA3A;
 }
+.answer-questions{
+  display: flex;
+  justify-items: right;
+  padding-bottom: 60px;
+  padding-top: 30px;
+}
+.submit-answer{
+    text-decoration: none;
+    color: #011627;
+    font-size: 30pt;
+    margin-top: 20px;
+    background-color: #D0EDF1;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 0px;
+
+}
+.submit-answer:hover{
+    box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+}
+.answers{ 
+  font-size: 18px;
+  color: #D0EDF1;
+} 
 </style>

@@ -50,7 +50,8 @@
                           <router-link to="/editgame" class="ok submit">Edit</router-link>
                         </td>
                         <td>
-                          <button @click="deleteGame(game)" class="submit">Delete</button>
+                          <button @click="deleteGame(game)" class="submit delete">Delete</button>
+                          <p class="warning">**Delete** cannot be undone</p>
                         </td>
                       </tr>
                     </tbody>
@@ -147,5 +148,20 @@ iframe{
 }
 h2{
   text-align: center
+}
+.delete:hover ~ .warning{
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: #011627;
+  background-color: #FE4A49;
+  border-radius: 3px;
+  padding: 2px 7px 2px;
+  margin-top: 25px;
+  width: 73px;
+  text-align: center;
+}
+.warning{
+  display: none;
 }
 </style>

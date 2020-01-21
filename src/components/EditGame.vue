@@ -1,9 +1,13 @@
 <template>
   <div class="wrap-contact100">
+    <div class="edit-game">
+      <span class="contact100-form-title">
+        Edit Game
+      </span>
+      <button class="delete-button" @click="deleteGame(game)">Delete Game</button>
+      <p class="delete-warning">deleting game cannot be undone</p>
+    </div>
       <form @submit.prevent="onSubmit" class="contact100-form validate-form">
-          <span class="contact100-form-title">
-            Edit Game
-          </span>
           <label class="label-input100">Title</label>
           <div class="wrap-input100 validate-input">
             <input
@@ -14,7 +18,6 @@
                 required
                 class="input100"
             >
-                    
           </div>
 
           <label class="label-input100">Intro</label>
@@ -94,6 +97,9 @@ export default {
       this.$store.dispatch('setEditGame', game)
 
     },
+    deleteGame(game){
+      this.$store.dispatch('deleteGame', game)
+    }
   }
 }
 </script>
@@ -160,5 +166,44 @@ export default {
     box-shadow: 0 9.5px 24px #009FB7, 0 7.5px 16px rgba(0, 0, 0, 0.22);
     color: #D0EDF1;
     background-color: #011627;
+}
+.delete-button{
+    font-family: 'Roboto', sans-serif;
+    font-size: 26px;
+    color: #8BD3DE;
+    line-height: 1.5;
+    padding-bottom: 11px;
+    background-color: #D0EDF1;
+    padding: 1px 7px 2px;
+    text-decoration: none;
+    color: #011627;
+    border-radius: 3px;
+    align-self: center;
+    box-shadow: 0 9.5px 24px rgba(0, 0, 0, 0.3), 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    border: none;
+    margin-bottom: 67px;
+}
+.delete-button:hover{
+    box-shadow: 0 9.5px 24px #009FB7, 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    color: #D0EDF1;
+    background-color: #011627;
+    margin-bottom: 0;
+}
+.delete-button:hover ~ .delete-warning{
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  color: #011627;
+  background-color: #FE4A49;
+  border-radius: 3px;
+  padding: 1px 7px 2px;
+}
+.edit-game{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.delete-warning{
+  display: none;
 }
 </style>

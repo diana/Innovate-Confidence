@@ -64,6 +64,9 @@ export default {
     font-size: 20px;
     padding: .5vw;
     border-radius: 3px;
+    background: none;
+    border: none;
+    font-family: 'Roboto', sans-serif;
 }
 .login:hover{
     box-shadow: 0 9.5px 24px #FFD35D, 0 7.5px 16px rgba(0, 0, 0, 0.22);

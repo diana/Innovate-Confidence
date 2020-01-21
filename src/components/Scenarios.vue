@@ -4,7 +4,7 @@
             <div class="router-div">
                 <router-link to="/viewgame" class="router-button">To Game</router-link>
                 <h1 class="game-title">Please Pick One</h1>
-                <router-link to="/gamedashboard" class="router-button">To User Dashboard</router-link>
+                <router-link to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
             </div>
             <div class="flex" >
                 <div 

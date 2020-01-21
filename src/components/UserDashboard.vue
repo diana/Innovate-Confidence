@@ -12,7 +12,7 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title mb-4">User Dashboard</h3>
+                  <h3 class="card-title mb-4" >User Dashboard</h3>
                   <div class="table-responsive">
                     <table class="table center-aligned-table">
                       <tr class='games'>
@@ -69,7 +69,7 @@ export default {
     editGame(game){
       this.$store.dispatch('setEditGame', game)
     },
-  }
+  },
 }
 </script>
 

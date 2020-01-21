@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
@@ -28,19 +29,120 @@ export const router = new VueRouter({
     { path: '/home', component: FrontPage },
     { path: '/login', component: Login },
     { path: '/signup', component: SignUp },
-    { path: '/userdashboard', component: UserDashboard}, 
-    { path: '/gamedashboard', component: GameDashboard },
-    { path: '/creategame', component: CreateGame },
-    { path: '/editgame', component: EditGame },
+    { 
+      path: '/userdashboard/',
+      name: 'userdashboard',
+      component: UserDashboard,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },     
+    { 
+      path: '/gamedashboard', 
+      component: GameDashboard,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/creategame', 
+      component: CreateGame,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/editgame', 
+      component: EditGame,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      } 
+    },
     { path: '/viewgame', component: ViewGame },
     { path: '/scenarios', component: Scenarios },
-    { path: '/editscenarios', component: EditScenarios },
-    { path: '/editscenario', component: EditScenario },
-    { path: '/createscenarios', component: CreateScenarios },
+    { 
+      path: '/editscenarios', 
+      component: EditScenarios,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/editscenario', 
+      component: EditScenario, 
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/createscenarios', 
+      component: CreateScenarios, 
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
     { path: '/questions', component: Questions },
-    { path: '/editquestions', component: EditQuestions },
-    { path: '/createquestion', component: CreateQuestion },
-    { path: '/editquestion', component: EditQuestion },
+    { 
+      path: '/editquestions', 
+      component: EditQuestions,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      } 
+    },
+    { 
+      path: '/createquestion', 
+      component: CreateQuestion, 
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/editquestion', 
+      component: EditQuestion,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
   ]
 })
 
