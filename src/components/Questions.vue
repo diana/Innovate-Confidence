@@ -2,29 +2,52 @@
     <div class="scenarios">
         <div class="game-div">
             <div class="router-div">
-                <router-link to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
-                <h1 class="game-title">{{game.title}}</h1>
-                <router-link to="/userdashboard" class="router-button">To User Dashboard</router-link>
+                <router-link to="/viewgame" class="router-button">To Game</router-link>
+                <h1 class="game-title">Answer</h1>
+                <router-link to="/gamedashboard" class="router-button">To User Dashboard</router-link>
             </div>
-            <div class="body-div">
-                <div class="game-intro">
-                    <h4>About This Game</h4>
-                    <p class="body">{{game.intro}}</p>
-                </div>
-                <div class="video-intro">
-                    <div>
-                        <iframe 
-                            class="video"
-                            id="ytplayer" 
-                            type="text/html" 
-                            width="540vw" 
-                            height="360vw"
-                            background-color="#011627"
-                            :src="game.video"
-                            frameborder="0">
-                        </iframe>
+            <div class="flex" >
+                <div class="card">
+                    <div class="header">
+                        <div class="title">
+                            <div class="header-title">
+                                <h1>{{this.$store.state.auth.scenario.title}}</h1>
+                            </div>
+                        </div>
                     </div>
-                    <router-link to="/scenarios" class="add-button">Enter Game</router-link>
+                    <div class="content">
+                        <div class="closebar">
+                            <h1>{{this.$store.state.auth.scenario.title}}...</h1>
+                            <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
+                        </div>
+                        <p>{{this.$store.state.auth.scenario.description}}</p>
+                        <div class="image">
+                            <img :src="this.$store.state.auth.scenario.image" />
+                        </div>
+                    </div>
+                </div>
+                <div class="card" v-for="question in questions" :key="question.id">
+                    <div class="header">
+                        <div class="title">
+                            <div class="header-title">
+                                <h1>{{question.question}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="closebar">
+                            <h1>{{question.question}}...</h1>
+                            <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
+                        </div>
+                        <textarea v-model="yourAnswer" placeholder="enter answer here"></textarea>
+                        <button type="submit" @click="getAnswer">Submit</button>
+                        <div v-if="question.answer === answer">
+                          <h1>Your Answer</h1>
+                          <p>{{this.yourAnswer}}</p>
+                          <h1>Correct Answer</h1>
+                          <p>{{this.answer}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,12 +58,23 @@
 import { mapState } from 'vuex'
 
 export default {
-    name: 'viewgame',
-    computed: mapState({
-        scenarios: state => state.auth.scenarios,
-        game: state => state.auth.game
-    })
-
+    data(){
+    return{
+        answer: this.$store.state.auth.answer,
+        yourAnswer: ""
+  }
+  },
+  name: 'questions',
+  computed: mapState({
+      questions: state => state.auth.questions,
+  }),
+  methods:{
+    getAnswer(question){
+      // eslint-disable-next-line no-console
+      console.log(question)
+      this.$store.dispatch('getAnswer', question)
+    }
+  }
 }
 </script>
 
@@ -65,11 +99,13 @@ body {
 }
 
 .flex {
-  min-height: 80vh;
   display: flex;
   justify-content: space-evenly;
-  opacity: 75%;
+  padding-bottom: 60px;
+}
 
+.card:hover {
+    cursor: pointer;
 }
 
 .card {
@@ -101,6 +137,8 @@ body {
   text-align: center;
   justify-content: center;
   padding: 0px 15px;
+  text-shadow: 4px 4px #D0EDF1; 
+
 }
 .card .header .title h1 {
   margin: 0px;
@@ -135,6 +173,7 @@ body {
   overflow-y: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
   border-radius: 3px;
+  overflow: scroll;
 }
 .card .content.full {
   height: 600px;
@@ -308,87 +347,39 @@ img{
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
+    height: 15%;
 }
 .body-div{
     width: 100%;
     justify-content: space-evenly;
     align-items: flex-start;
-    height: 100%;
+    height: 15%;
     display: flex;
 }
 .scenarios{
     width: 75%;
 }
 .game-title{
-    color: #FDFFFC;
+    color: #FE4A49;
     padding: 50px;
     font-family: 'Roboto', sans-serif;
-    font-size: 80px;
-    margin: 0;
+    font-size: 50px;
+    /* background-color: #009FB7; */
+    text-shadow: 2px 2px #011627; 
+    margin: 0
 }
 .game-div{
-    background-color: #011627;
+    background-color: #FFCA3A;
     margin-bottom: 30px;
     opacity: 75%;
     border-radius: 3px;
 }
-.video{
-    border-radius: 3px;
-    margin-top: 2vw;
+textarea{
+    width: 100%;
+    height: 200px;
 }
-.game-intro{
-    background-color: #D0EDF1;
-    border-radius: 3px;
-    width: 50%;
-    margin: 30px;
-    padding: 15px;
-    padding-top: 0;
-    height: 60vh;
-}
-.video-intro{
-    background-color: #D0EDF1;
-    border-radius: 3px;
-    width: 50%;
-    margin: 30px;
-    padding: 15px;
-    padding-top: 0;
-    display: flex;
-    align-items:  center;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 60vh;
-}
-h4{
-    font-size: 24pt;
-    margin-top:30px;
-    margin-bottom:30px;
-}
-.body{
-    white-space: pre-wrap;
-    overflow: scroll;
-}
-.add-button{
-  height: 100px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  padding: 0px 15px;
-  text-shadow: 2px 2px #009FB7; 
-  font-size: 38px;
-  background-color: #011627;
-  color: #FDFFFC;
-  border-radius: 6px;
-  text-decoration: none;
-  box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
-}
-.add-button:hover{
-  cursor: pointer;
-  text-shadow: 4px 4px #D0EDF1; 
-  font-size: 38px;
-  color: #011627;
-  background-color: #FDFFFC;
-  box-shadow: 0 19px 48px #FE4A49, 0 15px 32px rgba(0, 0, 0, 0.22);
-
+.answer{
+    color: #D0EDF1;
+    text-shadow: 1px 1px #FFCA3A;
 }
 </style>

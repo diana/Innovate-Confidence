@@ -59,7 +59,8 @@ import { mapState } from 'vuex'
 export default {
   name: 'userdashboard',
   computed: mapState({
-    games: state => state.auth.games
+    games: state => state.auth.games,
+    user: state => state.auth.user
   }),
   methods:{
     goToGame(game){
@@ -201,7 +202,6 @@ export default {
 .table-responsive {
     display: block;
     width: 100%;
-    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -304,5 +304,9 @@ th{
   font-size: .8rem;
   color: #011627;
   border-radius: 3px;
+}
+.game-button:hover{
+  box-shadow: 0 9.5px 24px #009FB7, 0 7.5px 16px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
 }
 </style>

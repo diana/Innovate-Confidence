@@ -1,4 +1,5 @@
 <template>
+  <div class='container-fluid page-body-wrapper'>
     <div class="main-panel">
       <div class="content-wrapper">
         <section class="dashboard">
@@ -11,12 +12,14 @@
                     <table class="table center-aligned-table">
                       <tr class='games'>
                         <th>About Game</th>
-                        <th>Video</th>
+                        <th>Scenarios</th>
+                        <th>Questions</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
                       </tr>
-                        <tbody>
+                    <tbody>
                       <tr>
                         <td>
                           <div class=" game-intro">
@@ -24,15 +27,21 @@
                           </div>
                         </td> 
                         <td>
-                            <iframe 
-                                id="ytplayer" 
-                                type="text/html" 
-                                width="640vw" 
-                                height="360vw"
-                                background-color="#011627"
-                                :src="game.video"
-                                frameborder="0">
-                            </iframe>
+                          <h2>{{scenarios.length}}</h2>
+                        </td>
+                        <td>
+                          <h2>{{questions.length}}</h2>
+                        </td>
+                        <td>
+                          <iframe 
+                            id="ytplayer" 
+                            type="text/html" 
+                            width="640vw" 
+                            height="360vw"
+                            background-color="#011627"
+                            :src="game.video"
+                            frameborder="0">
+                          </iframe>
                         </td>
                         <td>
                           <router-link to="/viewgame" class="ok submit">Game</router-link>
@@ -44,19 +53,20 @@
                           <button @click="deleteGame(game)" class="submit">Delete</button>
                         </td>
                       </tr>
-                     </tbody>
-                    </table>
-                    <router-link to="/userdashboard" class="submit" >
+                    </tbody>
+                  </table>
+                  <router-link to="/userdashboard" class="submit" >
                     Back To User Dashboard
-                    </router-link>
-                    </div>
+                  </router-link>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -66,7 +76,9 @@ export default {
   name: 'gamedashboard',
 
   computed: mapState({
-    game: state => state.auth.game
+    game: state => state.auth.game,
+    scenarios: state => state.auth.scenarios,
+    questions: state => state.auth.questions
   }),
   methods:{
     editGame(game){
@@ -130,5 +142,10 @@ iframe{
 }
 .game-intro{
   word-wrap: break-word;
+  overflow: scroll;
+  height: 360px;
+}
+h2{
+  text-align: center
 }
 </style>

@@ -38,10 +38,14 @@
                 class="input100"
             />
           </div>
-        <div class='div-submit'>
+        <div class='edit-submit'>
             <input class='submit' type="submit" />
         </div>      
     </form>
+    <div class="router-div">
+      <router-link to="/userdashboard" class="router-button">To User Dashboard</router-link>
+    </div>
+
   </div>
 </template>
 

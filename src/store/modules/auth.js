@@ -20,10 +20,24 @@ const state = {
         video: '',
         scenarios: [],
     },
-    scenarios: []
-
+    scenarios: [],
+    scenario: {
+        id: '',
+        game_id: '',
+        title: '',
+        description: '',
+        image: '',
+        questions: []
+    },
+    questions: [],
+    question: {
+        id: null,
+        scenario_id: null,
+        question: '',
+        answer: ''
+    },
+    answer: '',
 }
-
 const getters = {
     user(state) {
         return state.user
@@ -33,6 +47,14 @@ const getters = {
     },
     games(state) {
         return state.game
+    },
+    loggedIn(state){
+        if(state.loggedIn === true){
+            return state.isLoggedIn
+        }
+        else{
+            return null
+        }
     }
 }
 
@@ -99,21 +121,70 @@ const actions = {
         const response = await backend.getGame(game)
         // eslint-disable-next-line no-console
             console.log(response)
-            commit('setScenario', response)
+            commit('setScenarios', response.scenarios)
+            commit('setQuestions', response.questions)
             // eslint-disable-next-line no-console
-            console.log(state.scenarios)
+            console.log(state.questions)
     },
 
-    setEditGame({commit}, game){
+    async getQuestions({commit}, scenario){
+        const response = await backend.getQuestions(scenario)
+        // eslint-disable-next-line no-console
+        console.log(response)
+        commit('setQuestions', response.questions)
+        commit('setScenario', scenario)
+        // eslint-disable-next-line no-console
+        console.log(state.questions)
+        router.push('/questions')
+    },
+
+    async getEditQuestions({commit}, scenario){
+        const response = await backend.getQuestions(scenario)
+        // eslint-disable-next-line no-console
+        console.log(response)
+        commit('setQuestions', response.questions)
+        commit('setScenario', scenario)
+        // eslint-disable-next-line no-console
+        console.log(state.questions)
+        router.push('/editquestions')
+    },
+
+    async setEditGame({commit}, game){
         commit('setGame', game)
         router.push('/editgame')
+        const response = await backend.getGame(game)
+            commit('setScenarios', response.scenarios)
+            commit('setQuestions', response.questions)
+
     },
 
-    createGame({commit,}, game){
-        backend.createGame(game)
-        commit('addGame', game)
-        commit('setGame', game)
-        router.push('/userdashboard')
+    async setEditScenarios({commit}, game){
+        const response = await backend.getScenarios(game)
+        router.push('/editscenarios')
+        commit('setScenarios', response)
+    },
+
+    async createGame({commit,}, game){
+        const response = await backend.createGame(game)
+            commit('addGame', response)
+            commit('setGame', response)
+            router.push('/gamedashboard')
+    },
+
+    createScenario({commit,}, scenario){
+        backend.createScenario(scenario)
+        commit('addScenario', scenario)
+        commit('setScenatio', scenario)
+        router.push('/editscenarios')
+    },
+
+    async createQuestion({commit,}, question){
+        // eslint-disable-next-line no-console
+        console.log(question)
+        await backend.createQuestion(question)
+            commit('addQuestion', question)
+            commit('setQuestion', question)
+            router.push('/editquestions')
     },
 
     async editGame({commit}, game){
@@ -123,14 +194,57 @@ const actions = {
         router.push('/gamedashboard')
     },
 
+    async editScenario({commit}, scenario){
+        const response = await backend.editScenario(scenario)
+            commit('setScenario', scenario)
+            commit('setScenarios', response)
+        router.push('/editscenarios')
+    },
+
+    async editQuestion({commit}, question){
+        const response = await backend.editQuestion(question)
+            commit('setQuestion', question)
+            commit('setQuestions', response)
+        router.push('/editquestions')
+    },
+
     async deleteGame({commit}, game){
         const response = await backend.deleteGame(game)
             commit('setGames', response)
         router.push('/userdashboard')
     },
     
-    logoutUser(){
+    async deleteScenario({commit}, scenario){
+        const response = await backend.deleteScenario(scenario)
+            commit('setScenarios', response)
+        router.push('/editscenarios')
+    },
 
+    async getScenario({commit}, scenario){
+        const response = await backend.getQuestions(scenario)
+            commit('setScenario', response)
+            commit('setQuestions', response.questions)
+            router.push('/editscenario')
+    },
+
+    getQuestion({commit}, question){
+        commit('setQuestion', question)
+        router.push('/editquestion')
+    },
+
+    async deleteQuestion({commit}, question){
+        const response = await backend.deleteQuestion(question)
+            commit('setQuestions', response)
+        router.push('/editquestions')
+    },
+
+    getAnswer({commit}, question){
+        commit('setAnswer', question)
+    },
+
+    logOut({commit}, event){
+        commit('logOut', event)
+        router.push('/home')
     }
 }
 
@@ -160,12 +274,71 @@ const mutations = {
             scenarios: game.scenarios
         }
     },
-    setScenario(state, scenarios){
+    setScenarios(state, scenarios){
         state.scenarios = scenarios
+    },
+    addScenario(state, scenario){
+        state.scenarios = [...state.scenarios, scenario]
+    },
+    setScenario(state, scenario){
+        state.scenario = { 
+            id: scenario.id, 
+            game_id: scenario.game_id, 
+            title: scenario.title, 
+            description: scenario.description, 
+            image: scenario.image,
+            questions: scenario.questions
+        }
+    },    
+   setQuestions(state, questions){
+        state.questions = questions
+    },    
+   setQuestion(state, question){
+        state.question = question
+    },
+    addQuestion(state, question){
+        state.questions = [...state.questions, question]
+    },
+    setAnswer(state, question){
+        state.answer = question.answer
+    },
+
+    logOut(state){
+        state.users =  [],
+        state.user = {
+            id: null,
+            games: null,
+            scenarios: null
+        },
+        state.games = [],
+        state.userId = null,
+        state.isLoggedIn = false,
+        state.game = {
+            id: '',
+            user_id: '',
+            title: '',
+            intro: '',
+            video: '',
+            scenarios: [],
+        },
+        state.scenarios = [],
+        state.scenario = {
+            id: '',
+            game_id: '',
+            title: '',
+            description: '',
+            image: '',
+            questions: []
+        },
+        state.questions = [],
+        state.question = {
+            id: null,
+            scenario_id: null,
+            question: '',
+            answer: ''
+        },
+        state.answer = ''
     }
-    // logOut(state){
-    //     state.
-    // }
 }
 
 export default{

@@ -10,17 +10,24 @@
         </div>
         <div class="links">
             <a href="#" class="login">about</a>
-            <router-link to="/login" class="login" >login</router-link>
-            <router-link to="/home" class="login" >logout</router-link>
+            <button @click="logOut" class="login" v-if="isLoggedIn">logout</button>
+            <router-link to="/login" class="login" v-else >login</router-link>
         </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
-    components:{
-
+    name: 'appheader',
+    computed: mapState({
+        isLoggedIn: state => state.auth.isLoggedIn
+    }),
+    methods:{
+        logOut(event){
+            this.$store.dispatch('logOut', event)
+        }
     }
 }
 </script>
@@ -57,5 +64,10 @@ export default {
     font-size: 20px;
     padding: .5vw;
     border-radius: 3px;
+}
+.login:hover{
+    box-shadow: 0 9.5px 24px #FFD35D, 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    background-color: #FFD35D;
+    color: #011627;
 }
 </style>

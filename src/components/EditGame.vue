@@ -38,6 +38,17 @@
                 class="input100"
             />
           </div>
+          <div class="scenarios-div">
+            <label class="label-scenario">Number of Scenarios: {{scenarios.length}}</label>
+            <router-link class='router-button'  to="/createscenarios">Create Scenarios</router-link>
+            <router-link class='router-button'  to="/editscenarios">Edit Scenarios</router-link>
+          </div>
+          <div class="scenarios-div">
+            <label class="label-scenario">Number of Questions: {{questions.length}}</label>
+            <router-link to="/editscenarios" class="label-questions">
+              To Create or Edit Questions Please First Select Scenario
+            </router-link>
+          </div>
         <div class='edit-submit'>
             <input class='submit' type="submit" />
         </div>      
@@ -64,20 +75,26 @@ export default {
     },
   name: 'editgame',
   computed: mapState({
-    game: state => state.auth.game
+    game: state => state.auth.game,
+    scenarios: state => state.auth.scenarios,
+    questions: state => state.auth.questions,
   }),
-      methods:{
-        onSubmit(){
-            this.$store.dispatch('editGame', {
-                id: this.id,
-                user_id: this.user_id,
-                title: this.title,
-                intro: this.intro,
-                video: this.video
-            })
-        },
-    }
+  methods:{
+    onSubmit(){
+        this.$store.dispatch('editGame', {
+            id: this.id,
+            user_id: this.user_id,
+            title: this.title,
+            intro: this.intro,
+            video: this.video
+        })
+    },
 
+    editGame(game){
+      this.$store.dispatch('setEditGame', game)
+
+    },
+  }
 }
 </script>
 
@@ -102,5 +119,46 @@ export default {
     text-decoration: none;
     color: #011627;
     border-radius: 3px;
+    box-shadow: 0 9.5px 24px rgba(0, 0, 0, 0.3), 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    
+}
+.router-button:hover{
+    box-shadow: 0 9.5px 24px #009FB7, 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    color: #D0EDF1;
+    background-color: #011627;
+    cursor: pointer;
+
+}
+.scenarios-div{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 34px;
+  align-items: center;
+}
+.label-scenario{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #8BD3DE;
+    line-height: 1.5;
+}
+.label-questions{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #8BD3DE;
+    line-height: 1.5;
+    padding-bottom: 11px;
+    background-color: #D0EDF1;
+    padding: 1px 7px 2px;
+    text-decoration: none;
+    color: #011627;
+    border-radius: 3px;
+    align-self: center;
+    box-shadow: 0 9.5px 24px rgba(0, 0, 0, 0.3), 0 7.5px 16px rgba(0, 0, 0, 0.22);
+}
+.label-questions:hover{
+    box-shadow: 0 9.5px 24px #009FB7, 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    color: #D0EDF1;
+    background-color: #011627;
 }
 </style>

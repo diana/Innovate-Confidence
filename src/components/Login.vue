@@ -148,6 +148,10 @@ export default {
     color: #011627;
     border-radius: 3px;
 }
+.submit:hover{
+    box-shadow: 0 9.5px 24px #009FB7, 0 7.5px 16px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+}
 .button{
     text-decoration: none;
     color: #009FB7;
