@@ -42,6 +42,7 @@ const state = {
         game_id: '',
         new: false,
     },
+    attempts: [],
     answer: {
         answer: '',
         question_id: null
@@ -127,6 +128,7 @@ const actions = {
             console.log(response)
             commit('setScenarios', response.scenarios)
             commit('setQuestions', response.questions)
+            commit('setAttempts', response.attempts)
             // eslint-disable-next-line no-console
             console.log(state.questions)
     },
@@ -262,10 +264,20 @@ const actions = {
         router.push('/home')
     },
 
-    newAttempt({commit}, attempt){
+    async newAttempt({commit}, attempt){
+        const response = await backend.setAttempt(attempt)
+            commit('setAttempt', response)
+            router.push({name: 'scenarios', params: {id: attempt.game_id}})
+            // eslint-disable-next-line no-console
+            console.log(response)
+    },
+    postAnswer({commit}, answer){
         // eslint-disable-next-line no-console
-        commit('setAttempt', attempt)
-        router.push({name: 'scenarios', params: {id: attempt.game_id}})
+        console.log(answer)
+        backend.postAnswer(answer)
+        .then(
+            commit('addAnswer', answer)
+        )
     }
 }
 
@@ -362,11 +374,19 @@ const mutations = {
     },
     setAttempt(state, attempt){
         state.attempt = {
-            firstName: attempt.firstName,
-            lastName: attempt.lastName,
+            firstName: attempt.first_name,
+            lastName: attempt.last_name,
             game_id: attempt.game_id,
+            username: attempt.username,
+            id: attempt.id,
             new: true,
         }
+    },
+    addAnswer(state, answer){
+        state.answers = [...state.answers, answer]
+    },
+    setAttempts(state, attempts){
+        state.attempts = attempts
     }
 }
 

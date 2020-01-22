@@ -21,6 +21,7 @@ import EditQuestion from './components/EditQuestion'
 import CreateQuestion from './components/CreateQuestion'
 import Questions from './components/Questions'
 import Player from './components/Player'
+import Attempts from './components/Attempts'
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,18 @@ export const router = new VueRouter({
       }
     },     
     { 
+      path: '/userdashboard',
+      name: 'userdashboard',
+      component: UserDashboard,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next('userdashboard/:id')
+        } else{
+          next('/login')
+        }
+      }
+    },     
+    { 
       path: '/gamedashboard', 
       component: GameDashboard,
       beforeEnter(to,from,next){
@@ -57,6 +70,17 @@ export const router = new VueRouter({
     { 
       path: '/creategame', 
       component: CreateGame,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/attempts', 
+      component: Attempts,
       beforeEnter(to,from,next){
         if(store.getters['loggedIn']){
           next()

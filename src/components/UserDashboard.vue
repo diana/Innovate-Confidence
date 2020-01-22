@@ -18,7 +18,6 @@
                       <tr class='games'>
                         <th>Games</th>
                         <th>Select Game</th>
-                        <th>Number of Players</th>
                         <th>Edit Game</th>
                       </tr>
                       <tbody>
@@ -32,7 +31,6 @@
                               View Game
                             </button>
                           </td>
-                          <td>7</td>
                           <td>
                             <button @click="editGame(game)" class='game-button'>Edit</button>
                           </td>
@@ -135,11 +133,13 @@ export default {
 .content-wrapper {
     background: #009FB7;
     padding: 1.5rem 1.7rem;
-    width: 100%;
+    min-width: 65%;
+    max-width: fit-content;
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     opacity: 80%;
     border-radius: 3px;
+    align-self: center;
 }
 .row {
     display: -webkit-box;

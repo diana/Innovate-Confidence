@@ -39,7 +39,10 @@
                             <h1>{{question.question}}...</h1>
                             <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
                         </div>
-                        <textarea req v-model="yourAnswer" placeholder="enter answer here"></textarea>
+                        <form @submit.prevent="postAnswer(question)">
+                          <textarea req v-model="answer" placeholder="enter answer here"></textarea>
+                          <input v-if="!isClicked" type="submit" class="enter-answer"/>
+                        </form>
                         <div class="answers" v-if="isClicked">
                           <h1>Correct Answer</h1>
                           <p>{{question.answer}}</p>
@@ -48,7 +51,7 @@
                 </div>
             </div>
             <div class="answer-questions">
-              <button class="submit-answer" @click="onClick">Submit</button>
+              <button class="submit-answer" @click="onClick">Show Answers</button>
             </div>
         </div>
     </div>
@@ -61,19 +64,28 @@ export default {
     data(){
     return{
         isClicked: false,
-        yourAnswer: "",
+        answer: "",
+        attempt: this.state.auth.attempt,
   }
   },
   name: 'questions',
   computed: mapState({
       game: state => state.auth.game,
       questions: state => state.auth.questions,
+      attempt: state => state.auth.attempt,
   }),
   methods:{
     getAnswer(){
     },
     onClick(){
-      this.isClicked = true
+      this.isClicked = !this.isClicked
+    },
+    postAnswer(question){
+      this.$store.dispatch('postAnswer', {
+        answer: this.answer,
+        question_id: question.id,
+        attempt_id: this.attempt.id
+        })
     }
   }
 }
@@ -410,4 +422,19 @@ textarea{
   font-size: 18px;
   color: #D0EDF1;
 } 
+.enter-answer{
+    text-decoration: none;
+    color: #011627;
+    font-size: 18pt;
+    margin-top: 20px;
+    background-color: #D0EDF1;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 0px;
+
+}
+.enter-answer:hover{
+    box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+}
 </style>

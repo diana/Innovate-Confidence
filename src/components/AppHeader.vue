@@ -4,12 +4,11 @@
             <!-- <router-link to="/" class="active item">
                 <img src="https://i.imgur.com/uHMskmT.png" class="logo-small"/>
             </router-link> -->
-            <router-link to="/home" class="active item">
+            <button @click="logOut" class="active item">
                 <img src="https://i.imgur.com/zxaHE8Z.png" class="logo"/>
-            </router-link>
+            </button>
         </div>
         <div class="links">
-            <a href="#" class="login">about</a>
             <button @click="logOut" class="login" v-if="isLoggedIn">logout</button>
             <router-link to="/login" class="login" v-else >login</router-link>
         </div>
@@ -32,7 +31,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 .nav{
     display: flex;
     flex-direction: row;
@@ -47,7 +46,7 @@ export default {
     width: 6vw;
 }
 .logo{
-    width: 15%;
+    width: 100%;
 }
 .links{
     width: 50%;
@@ -72,5 +71,10 @@ export default {
     box-shadow: 0 9.5px 24px #FFD35D, 0 7.5px 16px rgba(0, 0, 0, 0.22);
     background-color: #FFD35D;
     color: #011627;
+}
+.active{
+    width: 15%;
+    background: none;
+    border:none;
 }
 </style>

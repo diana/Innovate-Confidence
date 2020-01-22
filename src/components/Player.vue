@@ -29,6 +29,18 @@
                     class="input100"
                 />
             </div>
+        <label class="label-input100" >Username</label>
+            <div class="wrap-input100 validate-input alert-validate">
+                <input
+                    type="text"
+                    label="username"
+                    name="username" 
+                    id="username" 
+                    v-model="username" 
+                    required
+                    class="input100"
+                />
+            </div>
             <div class='edit-submit'>
                 <input class='submit' type="submit" />
             </div>
@@ -43,6 +55,7 @@ export default {
         return {
             firstName: '',
             lastName: '',
+            username: '',
             game_id: this.$route.params.game_id
         }
     },
@@ -51,7 +64,8 @@ export default {
         onSignin(){
             this.$store.dispatch('newAttempt', {
                 firstName: this.firstName, 
-                lastName: this.lastName, 
+                lastName: this.lastName,
+                username: this.username, 
                 game_id: this.game_id
             })
         },

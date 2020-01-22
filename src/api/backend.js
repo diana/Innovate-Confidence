@@ -196,5 +196,42 @@ export default{
         return fetch(`${BASE_API}/scenarios/${question.scenario_id}`)
             .then(response => response.json())
             .then(result => result.questions)
+    },
+    async setAttempt(attempt){
+        await fetch(`${BASE_API}/attempts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                first_name: attempt.firstName,
+                last_name: attempt.lastName,
+                game_id: attempt.game_id,
+                username: attempt.username
+            })
+        })
+        return (fetch(`${BASE_API}/attempts`)
+            .then(response => response.json())
+            .then(result => result.find(username => {
+                    // eslint-disable-next-line no-console
+                    console.log(attempt, username)
+                if (attempt.username === username.username){
+                    return  result
+                }
+            }))        
+    )
+    },
+    postAnswer(answer){
+        fetch(`${BASE_API}/answers`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                answer: answer.answer,
+                question_id: answer.question_id,
+                attempt_id: answer.attempt_id
+            })
+        })
     }
 }
