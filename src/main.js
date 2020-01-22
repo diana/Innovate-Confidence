@@ -20,8 +20,10 @@ import EditQuestions from './components/EditQuestions'
 import EditQuestion from './components/EditQuestion'
 import CreateQuestion from './components/CreateQuestion'
 import Questions from './components/Questions'
+import Question from './components/Question'
 import Player from './components/Player'
 import Attempts from './components/Attempts'
+import Attempt from './components/Attempt'
 
 Vue.use(VueRouter)
 
@@ -81,6 +83,30 @@ export const router = new VueRouter({
     { 
       path: '/attempts', 
       component: Attempts,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/question/:id',
+      name: 'question', 
+      component: Question,
+      beforeEnter(to,from,next){
+        if(store.getters['loggedIn']){
+          next()
+        } else{
+          next('/login')
+        }
+      }
+    },
+    { 
+      path: '/attempt/:id', 
+      name: 'attempt',
+      component: Attempt,
       beforeEnter(to,from,next){
         if(store.getters['loggedIn']){
           next()

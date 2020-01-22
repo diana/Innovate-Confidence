@@ -197,6 +197,7 @@ export default{
             .then(response => response.json())
             .then(result => result.questions)
     },
+
     async setAttempt(attempt){
         await fetch(`${BASE_API}/attempts`, {
             method: 'POST',
@@ -221,6 +222,7 @@ export default{
             }))        
     )
     },
+
     postAnswer(answer){
         fetch(`${BASE_API}/answers`, {
             method: 'POST',
@@ -233,5 +235,33 @@ export default{
                 attempt_id: answer.attempt_id
             })
         })
-    }
+    },
+
+    async showAttempt(id){
+        return(
+            await fetch(`${BASE_API}/attempts/${id}`)
+                .then(response => response.json())
+                // eslint-disable-next-line no-console
+                .then(result => result)
+        )
+    },
+    
+    async deleteAttempt(attempt){
+        await fetch(`${BASE_API}/attempts/${attempt.id}`, {
+            method: 'DELETE'
+        })
+        return fetch(`${BASE_API}/games/${attempt.game_id}`)
+        .then(response => response.json())
+        .then(result => result)
+    },
+    
+    async getQuestion(answer){
+        return(
+            await fetch(`${BASE_API}/questions/${answer.question_id}`)
+                .then(response => response.json())
+                // eslint-disable-next-line no-console
+                .then(result => result)
+        )
+    },
+    
 }

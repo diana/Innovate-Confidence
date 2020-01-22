@@ -11,25 +11,6 @@
                     <div class="header">
                         <div class="title">
                             <div class="header-title">
-                                <h1>{{this.$store.state.auth.scenario.title}}</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="closebar">
-                            <h1>{{this.$store.state.auth.scenario.title}}...</h1>
-                            <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
-                        </div>
-                        <p>{{this.$store.state.auth.scenario.description}}</p>
-                        <div class="image">
-                            <img :src="this.$store.state.auth.scenario.image" />
-                        </div>
-                    </div>
-                </div>
-                <div class="card" v-for="question in questions" :key="question.id">
-                    <div class="header">
-                        <div class="title">
-                            <div class="header-title">
                                 <h1>{{question.question}}</h1>
                             </div>
                         </div>
@@ -39,11 +20,11 @@
                             <h1>{{question.question}}...</h1>
                             <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
                         </div>
-                        <form @submit.prevent="postAnswer(question)">
-                          <textarea required v-model="answer" placeholder="enter answer here"></textarea>
-                          <input v-if="!isClicked" type="submit" class="enter-answer"/>
-                        </form>
-                        <div class="answers" v-if="isClicked">
+                        <div class="answers">
+                          <h1>{{attempt.username}}'s' Answer</h1>
+                          <p>{{attemptAnswer.answer}}</p>
+                        </div>
+                        <div class="answers">
                           <h1>Correct Answer</h1>
                           <p>{{question.answer}}</p>
                         </div>
@@ -51,7 +32,7 @@
                 </div>
             </div>
             <div class="answer-questions">
-              <button class="submit-answer" @click="onClick">Show Answers</button>
+                <router-link class="submit" :to="{name:'attempt', params: {id: attempt.id}}">Back to Attempt</router-link>
             </div>
         </div>
     </div>
@@ -61,32 +42,13 @@
 import { mapState } from 'vuex'
 
 export default {
-    data(){
-    return{
-        isClicked: false,
-        answer: "",
-  }
-  },
-  name: 'questions',
+  name: 'question',
   computed: mapState({
       game: state => state.auth.game,
-      questions: state => state.auth.questions,
+      question: state => state.auth.question,
       attempt: state => state.auth.attempt,
+      attemptAnswer: state => state.auth.attemptAnswer
   }),
-  methods:{
-    getAnswer(){
-    },
-    onClick(){
-      this.isClicked = !this.isClicked
-    },
-    postAnswer(question){
-      this.$store.dispatch('postAnswer', {
-        answer: this.answer,
-        question_id: question.id,
-        attempt_id: this.attempt.id
-        })
-    }
-  }
 }
 </script>
 

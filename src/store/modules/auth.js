@@ -43,10 +43,8 @@ const state = {
         new: false,
     },
     attempts: [],
-    answer: {
-        answer: '',
-        question_id: null
-    },
+    gameAttempts: [],
+    answer: {},
     answers: []
 }
 const getters = {
@@ -128,7 +126,8 @@ const actions = {
             console.log(response)
             commit('setScenarios', response.scenarios)
             commit('setQuestions', response.questions)
-            commit('setAttempts', response.attempts)
+            commit('setGameAttempts', response.attempts)
+            commit('setAnswers', response.answers)
             // eslint-disable-next-line no-console
             console.log(state.questions)
     },
@@ -272,13 +271,36 @@ const actions = {
             console.log(response)
     },
     postAnswer({commit}, answer){
-        // eslint-disable-next-line no-console
-        console.log(answer)
         backend.postAnswer(answer)
-        .then(
-            commit('addAnswer', answer)
-        )
+        commit('addAnswer', answer)
+        },
+    async showAttempt({commit}, id){
+        router.push({name: 'attempt', params: {id: id}})
+        const response = await backend.showAttempt(id)
+        // eslint-disable-next-line no-console
+            console.log(response)
+            commit('setAttempt', response)
+            commit('setAnswers', response.answers)
+            // eslint-disable-next-line no-console
+            console.log(state.attempts)
+    },
+    async deleteAttempt({commit}, attempt){
+        const response = await backend.deleteAttempt(attempt)
+        // eslint-disable-next-line no-console
+            console.log(response)
+            commit('setGameAttempts', response.attempts)
+            // eslint-disable-next-line no-console
+            console.log(state.gameAttempts)
+            router.push('/gamedashboard')
+    },
+    async viewQuestion({commit}, answer){
+        commit('setAttemptAnswer', answer)
+        const response = await backend.getQuestion(answer)
+            commit('setQuestion', response)
+            router.push({name: 'question', params: {id: response.id}})
+        
     }
+
 }
 
 const mutations = {
@@ -370,7 +392,19 @@ const mutations = {
             question: '',
             answer: ''
         },
-        state.answer = ''
+        state.attempts = [],
+        state.attempt = {
+            firstName: '',
+            lastName: '',
+            game_id: '',
+            new: false,
+        },
+        state.answers = [],
+        state.answer = {
+            answer: '',
+            question_id: null
+        },
+        state.attemptAnswer = {}
     },
     setAttempt(state, attempt){
         state.attempt = {
@@ -385,8 +419,17 @@ const mutations = {
     addAnswer(state, answer){
         state.answers = [...state.answers, answer]
     },
-    setAttempts(state, attempts){
-        state.attempts = attempts
+    addAttempts(state, attempt){
+        state.attempts = [...state.attempts, attempt]
+    },
+    setGameAttempts(state, attempts){
+        state.gameAttempts = attempts
+    },
+    setAnswers(state, answers){
+        state.answers = answers
+    },
+    setAttemptAnswer(state, answer){
+        state.attemptAnswer = answer
     }
 }
 

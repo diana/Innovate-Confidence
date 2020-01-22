@@ -78,13 +78,13 @@ import { mapState } from 'vuex'
 
 export default {
     data(){
-    return{
-        id: this.$store.state.auth.scenario.id,
-        game_id: this.$store.state.auth.game.id,
-        title: this.$store.state.auth.scenario.title,
-        description: this.$store.state.auth.scenario.description,
-        image: this.$store.state.auth.scenario.image
-    }
+      return{
+          id: this.$store.state.auth.scenario.id,
+          game_id: this.$store.state.auth.game.id,
+          title: this.$store.state.auth.scenario.title,
+          description: this.$store.state.auth.scenario.description,
+          image: this.$store.state.auth.scenario.image
+      }
     },
   name: 'editscenario',
   computed: mapState({

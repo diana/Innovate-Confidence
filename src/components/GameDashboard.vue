@@ -14,7 +14,9 @@
                         <th>About Game</th>
                         <th>Scenarios</th>
                         <th>Questions</th>
-                        <th>Players</th>
+                        <th>
+                          Players
+                        </th>
                         <th></th>
                         <th>URL</th>
                         <th></th>
@@ -35,7 +37,7 @@
                           <h2>{{questions.length}}</h2>
                         </td>
                         <td>
-                          <router-link to="attempts">{{attempts.length}}</router-link>
+                          <router-link class="submit delete" to="attempts">{{gameAttempts.length}}</router-link>
                         </td>
                         <td>
                           <iframe 
@@ -89,7 +91,7 @@ export default {
     game: state => state.auth.game,
     scenarios: state => state.auth.scenarios,
     questions: state => state.auth.questions,
-    attempts: state => state.auth.attempts,
+    gameAttempts: state => state.auth.gameAttempts,
   }),
   methods:{
     editGame(game){
@@ -157,7 +159,8 @@ iframe{
   height: 360px;
 }
 h2{
-  text-align: center
+  text-align: center;
+  margin: 0;
 }
 .delete:hover ~ .warning{
   display: block;
@@ -173,5 +176,8 @@ h2{
 }
 .warning{
   display: none;
+}
+td{
+  justify-content: center;
 }
 </style>

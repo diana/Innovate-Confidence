@@ -292,6 +292,7 @@ td {
     display: table-cell;
     vertical-align: inherit;
     white-space: pre-wrap;
+    text-align: left
 }
 th{
   font-family: 'Roboto', sans-serif;
