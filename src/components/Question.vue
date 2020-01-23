@@ -75,6 +75,9 @@ body {
 .flex {
   display: flex;
   justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .card:hover {
@@ -344,7 +347,7 @@ img{
 .game-div{
     background-color: #FFCA3A;
     margin-bottom: 30px;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
     display: flex;
     flex-direction: column;

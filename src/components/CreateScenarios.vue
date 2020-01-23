@@ -111,7 +111,7 @@ export default {
     padding: 55px 95px 68px 95px;
     margin: 55px;
     background-color: #FFCA3A;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
 }
 .create-scenarios{
@@ -159,7 +159,7 @@ export default {
 }
 .card .header .title h1 {
   margin: 0px;
-  font-size: 38px;
+  font-size: 20px;
   color: #011627;
 }
 .card .header .title h6 {
@@ -218,7 +218,7 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-    background-color: #011627;
+  background-color: #011627;
   top: 0;
   left: 0;
 }

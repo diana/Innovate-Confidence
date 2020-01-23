@@ -14,7 +14,7 @@
                       <div class="header">
                           <div class="title">
                               <div class="header-title">
-                                  <h1 class="h1">Scenario</h1>
+                                  <h1 class="h1-scenario">Scenario</h1>
                                   <h2>{{this.$store.state.auth.scenario.title}}</h2>
                               </div>
                           </div>
@@ -146,11 +146,10 @@ body {
   justify-content: center;
   padding: 0px 15px;
   text-shadow: 4px 4px #D0EDF1; 
-
 }
 .card .header .title h1 {
   margin: 0px;
-  font-size: 38px;
+  font-size: 20pt;
   color: #011627;
 }
 .card .header .title h6 {
@@ -379,7 +378,7 @@ img{
 .game-div{
     background-color: #FFCA3A;
     margin-bottom: 30px;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
 }
 textarea{
@@ -417,9 +416,9 @@ textarea{
 
 }
 h2{
-  font-size: 25pt;
+  font-size: 18pt;
 }
-.h1{
+.h1-scenario{
   font-size: 30pt;
   text-decoration: underline;
   text-shadow: 2px 1px #D0EDF1; 

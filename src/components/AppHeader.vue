@@ -39,7 +39,7 @@ export default {
     background-color: #011627;
     justify-content: space-between;
     padding: .5%;
-    opacity: 85%;
+    opacity: 0.85;
     width: 100%
 }
 .logo-small{

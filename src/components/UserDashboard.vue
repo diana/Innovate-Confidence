@@ -120,8 +120,8 @@ export default {
 .main-panel {
     -webkit-transition: width .25s ease,margin .25s ease;
     transition: width .25s ease,margin .25s ease;
-    width: calc(100% - 255px);
     min-height: calc(100vh - 58px);
+    width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -133,11 +133,10 @@ export default {
 .content-wrapper {
     background: #009FB7;
     padding: 1.5rem 1.7rem;
-    min-width: 65%;
-    max-width: fit-content;
+    min-width: 75%;
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
-    opacity: 80%;
+    opacity: 0.85;
     border-radius: 3px;
     align-self: center;
 }
@@ -231,7 +230,7 @@ table {
   background-color: #FFD35D;
   text-align: center;
   font-size: 3vw;
-  opacity: 85%;
+  opacity: 0.85;
   margin: 1vw;
   border-radius: 3px;
 
@@ -240,6 +239,7 @@ table {
     vertical-align: middle;
     line-height: 1;
     white-space: pre-wrap;
+    max-width: 350px;
 }
 tbody {
     display: table-row-group;

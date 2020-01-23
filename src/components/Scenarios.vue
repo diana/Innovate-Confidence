@@ -79,6 +79,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding-bottom: 60px;
+  flex-direction: row;
+  flex-wrap: wrap
 }
 
 .card:hover {
@@ -94,6 +96,7 @@ body {
   overflow: hidden;
   background-color: #FDFFFC;
   box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+  margin-bottom: 50px;
 }
 .card .header {
   height: 200px;
@@ -147,7 +150,7 @@ body {
   padding: 20px 30px 30px 30px;
   position: relative;
   background-color: #011627;
-  overflow-y: hidden;
+  overflow-y: scroll;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
   border-radius: 3px;
 }
@@ -347,7 +350,7 @@ img{
 .game-div{
     background-color: #FFCA3A;
     margin-bottom: 30px;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
 }
 </style>

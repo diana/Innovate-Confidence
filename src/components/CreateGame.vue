@@ -86,7 +86,7 @@ export default {
     border-radius: 3px;
     padding: 55px 95px 68px 95px;
     margin: 55px;
-    opacity: 80%;
+    opacity: 0.85;
 }
 .contact100-form {
     width: 100%;

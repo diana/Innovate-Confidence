@@ -93,7 +93,7 @@ export default {
     flex-wrap: wrap; 
     padding: 1vw;
     width: 85%;
-    opacity: 65%;
+    opacity: 0.85;
     border-radius: 3px;
 
 }
@@ -177,7 +177,7 @@ export default {
     width: 30%;
     text-align: center;
     font-size: 3vw;
-    opacity: 85%;
+    opacity: 0.85;
     margin: 1vw;
     border-radius: 3px;
 }

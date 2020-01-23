@@ -63,8 +63,8 @@ const getters = {
 }
 
 const actions = {
-    signUserUp({commit}, payload){
-        firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+    async signUserUp({commit}, payload){
+        await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then( 
             async user => {
                 const newUser = {
@@ -73,15 +73,15 @@ const actions = {
                 // eslint-disable-next-line no-console
                 console.log(newUser)
                 window.localStorage.setItem('user', newUser)
-                const response = await backend.createUser(newUser)
-                    commit('setUser', newUser)
-                    router.push({name: 'userdashboard', params: { id: response.id }})
+                await backend.createUser(newUser)
+                    commit('setUser', user)                    
+                    commit('setLoggedIn', true)
+                    router.push('/login')
             }
         )
         .catch(
             error => {
-                // eslint-disable-next-line no-console
-                console.log(error)
+                alert(error.message)
             }
         )
     },
@@ -103,20 +103,10 @@ const actions = {
         .catch(
             error => {
                 // eslint-disable-next-line no-console
-                console.log(error)
+                alert(error.message)
             }
         )
     },
-//     async autoSignin({commit}, user) {
-//         const newUserId = user.uid
-
-//         router.push('/userdashboard')
-//         const response = await backend.getUser(newUserId)
-//             commit('setUser', response)
-//             commit('setUserId', response.id)
-//             commit('setLoggedIn', true)
-//             commit('setGames', response.games)
-// },
 
     async getGame({commit}, game){
         commit('setGame', game)
@@ -156,6 +146,7 @@ const actions = {
 
     async getEditQuestions({commit}, scenario){
         const response = await backend.getQuestions(scenario)
+        if(response){
         // eslint-disable-next-line no-console
         console.log(response)
         commit('setQuestions', response.questions)
@@ -163,6 +154,7 @@ const actions = {
         // eslint-disable-next-line no-console
         console.log(state.questions)
         router.push('/editquestions')
+        }else(router.push('/createQuestion'))
     },
 
     async setEditGame({commit}, game){
@@ -430,7 +422,7 @@ const mutations = {
     },
     setAttemptAnswer(state, answer){
         state.attemptAnswer = answer
-    }
+    },
 }
 
 export default{

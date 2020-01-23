@@ -99,7 +99,7 @@ export default {
     padding: 55px 95px 68px 95px;
     margin: 55px;
     background-color: #FFCA3A;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
 }
 .create-scenarios{

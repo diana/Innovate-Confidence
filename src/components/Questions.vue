@@ -3,7 +3,7 @@
         <div class="game-div">
             <div class="router-div">
                 <router-link :to="{name: 'viewgame', params: {id: game.id}}" class="router-button">To Game</router-link>
-                <h1 class="game-title">Answer</h1>
+                <h1 class="game-title">Answer Each Question</h1>
                 <router-link :to="{name: 'scenarios', params: {id: game.id}}" class="router-button">Back to Scenarios</router-link>
             </div>
             <div class="flex" >
@@ -40,7 +40,8 @@
                             <a href="#0" class="closebttn"><i class="material-icons">&#xE5CD;</i></a>
                         </div>
                         <form @submit.prevent="postAnswer(question)">
-                          <textarea required v-model="answer" placeholder="enter answer here"></textarea>
+                          <label>Enter Answer Below</label>
+                          <textarea required v-model="answer"></textarea>
                           <input v-if="!isClicked" type="submit" class="enter-answer"/>
                         </form>
                         <div class="answers" v-if="isClicked">
@@ -64,7 +65,7 @@ export default {
     data(){
     return{
         isClicked: false,
-        answer: "",
+        answer: '',
   }
   },
   name: 'questions',
@@ -80,12 +81,13 @@ export default {
       this.isClicked = !this.isClicked
     },
     postAnswer(question){
+      this.answer = ''
       this.$store.dispatch('postAnswer', {
         answer: this.answer,
         question_id: question.id,
         attempt_id: this.attempt.id
         })
-    }
+    },
   }
 }
 </script>
@@ -113,6 +115,9 @@ body {
 .flex {
   display: flex;
   justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .card:hover {
@@ -121,6 +126,7 @@ body {
 
 .card {
   margin: 0px 30px;
+  margin-bottom: 50px;
   width: 380px;
   height: 600px;
   position: relative;
@@ -382,7 +388,7 @@ img{
 .game-div{
     background-color: #FFCA3A;
     margin-bottom: 30px;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
     display: flex;
     flex-direction: column;
@@ -435,5 +441,17 @@ textarea{
 .enter-answer:hover{
     box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
     cursor: pointer;
+}
+textarea{
+  color:#FDFFFC;
+  background-color: #FDFFFC
+}
+textarea:focus{
+  color:#011627;
+}
+label{
+  margin-bottom: 10px;
+  font-size: 18pt;
+  color: #D0EDF1;
 }
 </style>

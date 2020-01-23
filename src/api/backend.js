@@ -1,5 +1,5 @@
 
-const BASE_API = 'http://localhost:3000'
+const BASE_API = 'https://young-lowlands-15866.herokuapp.com/'
 
 export default{
     async getUser(newUser){

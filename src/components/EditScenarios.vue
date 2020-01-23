@@ -142,7 +142,7 @@ body {
 
 }
 .card .header .title h1 {
-  font-size: 38px;
+  font-size: 22px;
   color: #011627;
 }
 .card .header .title h6 {
@@ -359,7 +359,7 @@ img{
 .game-div{
     background-color: #FFCA3A;
     margin-bottom: 40px;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
 }
 .edit-button{

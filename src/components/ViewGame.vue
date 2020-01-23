@@ -4,7 +4,7 @@
             <div class="router-div">
                 <router-link v-if="isLoggedIn" to="/gamedashboard" class="router-button">To Game Dashboard</router-link>
                 <h1 class="game-title">{{game.title}}</h1>
-                <router-link v-if="isLoggedIn" to="/userdashboard" class="router-button">To User Dashboard</router-link>
+                <router-link v-if="isLoggedIn" :to="{ name: 'userdashboard', params: game.user_id}" class="router-button">To User Dashboard</router-link>
             </div>
             <div class="body-div">
                 <div class="game-intro">
@@ -75,7 +75,7 @@ body {
   min-height: 80vh;
   display: flex;
   justify-content: space-evenly;
-  opacity: 75%;
+  opacity: 0.85;
 
 }
 
@@ -336,7 +336,7 @@ img{
 .game-div{
     background-color: #011627;
     margin-bottom: 30px;
-    opacity: 75%;
+    opacity: 0.85;
     border-radius: 3px;
 }
 .video{

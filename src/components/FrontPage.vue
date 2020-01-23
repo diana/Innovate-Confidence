@@ -1,18 +1,16 @@
 <template>
     <div class="intro">
-        <h3 class="intro-head">Welcome to Innovate Convidence</h3>
+        <h3 class="intro-head">Welcome to Innovate Confidence</h3>
         <div class="intro-content">
             <p class="introduction">
                 A platform to create and track training games for your 
-                employees using multiple proven strategies to reenforce learning!
+                employees. Make learning fun again for everyone!
             </p>
             <section class="intro-section">
                 <h4 class="testimonials">Testimonials:</h4>
-                <p class="test">"Best app yet"</p>
-                <p class="test">"This is super crazy, intuitive, and fun"</p>
-                <p class="test">"So many places to go"</p>
-                <p class="test">"Best app yet"</p>
-                <p class="test">"Best app yet"</p>
+                <p class="test">"Our employees complete trainings much faster because of this app."</p>
+                <p class="test">"Easy to use and beautifully designed."</p>
+                <p class="test">"Best training app I've used!!"</p>
             </section>
         </div>
         <router-link to="signup" class="signup">Sign Up Today!</router-link>
@@ -34,14 +32,14 @@ export default {
         align-items: center;
         margin: 5vw;
         background-color: #009FB7;
-        opacity: 75%;
+        opacity: 0.85;
         border-radius: 3px;
         padding: 1vw;
         width: calc(100% - 255px)
     }
     .intro-head{
         font-family: "Roboto", sans-serif;
-        font-size: 4vw;
+        font-size: 38pt;
         background-color: #8BD3DE;
         padding: .5vw;
         margin: 0;
@@ -49,7 +47,7 @@ export default {
         margin: 1vw;
         border-radius: 3px;
         align-self: center;
-        width: 85%;
+        width: fit-content;
         
     }
     .intro-content{
@@ -60,7 +58,7 @@ export default {
         width: 85%
     }
     .introduction{
-        font-size: 2vw;
+        font-size: 30pt;
         text-align: left;
         font-weight: bolder;
         color: #011627;
@@ -74,7 +72,7 @@ export default {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        font-size: 1.5vw;
+        font-size: 20pt;
         text-align: left;
         font-weight: bolder;
         color: #011627;
@@ -86,7 +84,7 @@ export default {
     }
     .testimonials{
         margin: 0;
-        font-size: 2.5vw;
+        font-size: 30pt;
         font-weight: bolder;
         font-family: 'Roboto', sans-serif;
         text-decoration: underline;
