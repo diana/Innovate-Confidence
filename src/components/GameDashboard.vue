@@ -51,7 +51,7 @@
                           </iframe>
                         </td>
                         <td>
-                          <a :href="'https://innovate-confidence.web.app/game/' + game.id">https://innovate-confidence.web.app/game/{{game.id}}</a>
+                          <a :href="'https://innovate-confidence.com/game/' + game.id">https://innovate-confidence.com/game/{{game.id}}</a>
                         </td>
                         <td>
                           <router-link :to="{ name: 'viewgame', params: { id: game.id}}" class="ok submit">Game</router-link>

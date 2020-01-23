@@ -81,13 +81,14 @@ export default {
       this.isClicked = !this.isClicked
     },
     postAnswer(question){
-      this.answer = ''
       this.$store.dispatch('postAnswer', {
         answer: this.answer,
         question_id: question.id,
         attempt_id: this.attempt.id
         })
+        .then(this.answer = '')
     },
+
   }
 }
 </script>
