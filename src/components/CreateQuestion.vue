@@ -17,6 +17,18 @@
                         class="input100"
                     />            
                 </div>
+                <label class="label-input100">Question Type</label>
+                <div class="wrap-input100 validate-input">
+                    <input
+                        type="dropdown"
+                        label="type"
+                        name="type"
+                        id="type"
+                        v-model="type" 
+                        required
+                        class="input100"
+                    />            
+                </div>                
                 <label class="label-input100">Answer</label>
                 <div class="wrap-input100 validate-input alert-validate">
                     <textarea 
@@ -70,6 +82,7 @@ export default {
             scenario_id: this.$store.state.auth.scenario.id,
             question: '',
             answer: '',
+            type: ''
         }
     },
 
@@ -79,6 +92,7 @@ export default {
                 scenario_id: this.scenario_id,
                 question: this.question,
                 answer: this.answer,
+                type: this.type
             })
         },
     }
