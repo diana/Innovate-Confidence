@@ -34,7 +34,8 @@ const state = {
         id: null,
         scenario_id: null,
         question: '',
-        answer: ''
+        answer: '',
+        type: ''
     },
     attempt: {
         firstName: '',
@@ -382,7 +383,8 @@ const mutations = {
             id: null,
             scenario_id: null,
             question: '',
-            answer: ''
+            answer: '',
+            type: ''
         },
         state.attempts = [],
         state.attempt = {

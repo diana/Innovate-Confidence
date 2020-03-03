@@ -83,6 +83,7 @@ export default{
                     scenario_id: question.scenario_id,
                     question: question.question,
                     answer: question.answer,
+                    type: question.type
                 })
             })
         )
@@ -191,6 +192,7 @@ export default{
                 scenario_id: question.scenario_id,
                 question: question.question,
                 answer: question.answer,
+                type: question.type
             })
         })
         return fetch(`${BASE_API}/scenarios/${question.scenario_id}`)
